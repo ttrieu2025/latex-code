@@ -1,0 +1,159 @@
+    % Template Source: Dave Richeson (divisbyzero.com), Dickinson College
+
+    \documentclass[10pt,landscape]{article}
+    \usepackage{amssymb,amsmath,amsthm,amsfonts}
+    \usepackage{multicol,multirow}
+    \usepackage{calc}
+    \usepackage{ifthen}
+    \usepackage{amsmath}
+    \usepackage{xfrac}
+    \usepackage{physics}
+    \usepackage[landscape]{geometry}
+    \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+    \usepackage{tabularx}
+    \usepackage{graphicx}
+    \usepackage[d]{esvect}
+
+
+    \ifthenelse{\lengthtest { \paperwidth = 11in}}
+        { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+        {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+            {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+            {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        }
+    \pagestyle{empty}
+    \makeatletter
+    \renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                    {-1ex plus -.5ex minus -.2ex}%
+                                    {0.5ex plus .2ex}%x
+                                    {\normalfont\large\bfseries}}
+    \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                    {-1explus -.5ex minus -.2ex}%
+                                    {0.5ex plus .2ex}%
+                                    {\normalfont\normalsize\bfseries}}
+    \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                    {-1ex plus -.5ex minus -.2ex}%
+                                    {1ex plus .2ex}%
+                                    {\normalfont\small\bfseries}}
+    \makeatother
+    \setcounter{secnumdepth}{0}
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{0pt plus 0.5ex}
+    % -----------------------------------------------------------------------
+
+    \begin{document}
+
+    \raggedright
+    \footnotesize
+
+    \begin{center}
+        \Large{\textbf{UBC MATH 253: Multivariable Calculus}} \\
+    \end{center}
+    \setlength{\columnseprule}{0.4pt}
+    \begin{multicols}{3}
+    \setlength{\premulticols}{1pt}
+    \setlength{\postmulticols}{1pt}
+    \setlength{\multicolsep}{1pt}
+    \setlength{\columnsep}{2pt}
+
+    \subsection*{1. Linear Algebra}
+    \subsubsection{Dot and Cross Product}
+    For two vectors $\vec{a}=[a_1,a_2,a_3]$ and $\vec{b}=[b_1,b_2,b_3],$
+    \begin{align*}
+    &\text{Magnitude} &&||\vec{a}|| = \sqrt{a_1^2+a_2^2+a_3^2}\\
+    &\text{Unit Vector}&&\hat{a} = \frac{\vec{a}}{||\vec{a}||}\\
+    &\text{Dot Product} && \vec{a}\cdot \vec{b} = a_1b_1+a_2b_2+a_3b_3\\
+    &\text{Cross Product}&&\vec{a}\times \vec{b} = 
+    \det\begin{bmatrix}
+        \vec{i} &\vec{j} &\vec{k}\\
+        a_1    &a_2    &a_3\\
+        b_1    &b_2    &b_3\\
+    \end{bmatrix}\\
+    &\text{Projection} && \text{proj}_{\vec{a}}\vec{b}=\dfrac{\vec{a}\cdot\vec{b}}{||\vec{a}||}\dfrac{\vec{a}}{||\vec{a}||}
+    \end{align*}
+
+    \subsubsection{Coordinate Geometry in 3D}
+    Distance between $P(x_0,y_0,z_0)$ and $W:ax+by+ cz+d=0$
+    \[d(P,W) = \frac{|ax_0+by_0+cz_0+d|}{\sqrt{a^2+b^2+c^2}}\]
+    Area of a parallelogram created by $\vec{a}$ and $\vec{b}$
+    \[\text{Area}=||\vec{a}\times \vec{b}||\]
+    Volume of a parallelepiped created by vector $\vec{a},\vec{b}$ and $\vec{c}$ 
+    \[\text{Volume}=\left|(\vec{a}\times \vec{b})\cdot \vec{c}\,\right|\]
+
+
+    \subsection*{2. Partial Derivatives}
+    \subsubsection{Chain Rule}
+    \textbf{Case 1.} $z=f(x,y)$ with $x(t)$ and $y(t)$
+    \[\dv{z}{t}=\pdv{f}{x}\dv{x}{t}+\pdv{f}{y}\dv{y}{t}\]
+    \textbf{Case 2.} $z=f(x,y)$ with $x(s,t)$ and $y(s,t)$
+    \begin{align*}
+    \pdv{z}{s}&=\pdv{f}{x}\pdv{x}{s}+\pdv{f}{y}\pdv{y}{s}\\
+    \pdv{z}{t}&=\pdv{f}{x}\pdv{x}{t}+\pdv{f}{y}\pdv{y}{t}
+    \end{align*}
+    \subsubsection{Implicit Differentiation} For $F(x,y,z)=0$,
+    \[z_x=-\frac{F_x}{F_z}\qquad z_y=-\frac{F_y}{F_z}\]
+    \text{Gradient}\qquad \qquad \qquad\, $\nabla f = [f_x, f_y, f_z]$\\[2pt]
+    \text{Directional Derivative}\, $\displaystyle \,D_{\hat{v}}f(a,b)=\nabla f(a,b)\cdot\frac{\vec{v}}{||\vec{v}||}$ at $(a,b)$\\[4pt]
+    Rate of change \qquad\quad\, $D_{\vec{v}}f(a,b) = \nabla f(a,b) \cdot \vec{v}$\qquad at $(a,b)$
+
+    \subsubsection{Tangent Plane Equation}
+    \textbf{Explicit form} \qquad $z=f(x,y)$\\[4pt]
+    At point $(x_0,y_0,z_0)$ where $z_0=f(x_0,y_0)$,
+    \[z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)\]
+    \textbf{Implicit form} \qquad $F(x,y,z)=0$\\[4pt]
+    At point $(x_0,y_0,z_0)$,
+    \[\nabla F(x_0,y_0,z_0)\cdot \begin{bmatrix}
+        x-x_0\\
+        y-y_0\\
+        z-z_0
+    \end{bmatrix}=0\]
+
+    \subsubsection{Optimization}
+
+    Lagrange Multipliers
+    $\begin{cases}
+    \nabla f(x,y,z) = \lambda \nabla g(x,y,z) \\[2pt]
+    g(x,y,z) = k
+    \end{cases}$\\[6pt]
+
+    Hessian Matrix \qquad $D(x,y) =\text{det}\begin{bmatrix}
+        f_{xx} &f_{xy}\\
+        f_{yx} &f_{yy}
+    \end{bmatrix}=f_{xx}f_{yy}-f_{xy}^2$
+    \begin{itemize}
+        \item If $D(a,b)>0$ and $f_{xx}(a,b)>0$ then $(a,b)$ is local min
+        \item If $D(a,b)>0$ and $f_{xx}(a,b)<0$ then $(a,b)$ is local max
+        \item If $D(a,b)<0$ then $(a,b)$ is a saddle point
+        \item If $D(a,b)$ then test is inclusive
+    \end{itemize}
+    \subsection*{3. Multiple Integrals}
+    Double Integral \qquad $\displaystyle\iint \limits_R f(x,y)\dd A$\\
+    Average value \quad \, \quad \,$f_\text{avg}=\displaystyle\frac{\iint \limits_R f(x,y) \dd A}{\iint \limits_R \dd A}$\\
+    Surface Area\qquad\,\,SA = $\displaystyle\iint \limits_S \sqrt{1+f_x^2+f_y^2} \,\dd A$\\
+    Triple Integral \qquad $\displaystyle \iiint \limits_E F(x,y,z)dV$\\
+    Average value\quad \, \quad \,$F_\text{avg}=\displaystyle\frac{\iiint \limits_E F(x,y,z) \dd V}{\iiint \limits_E \dd V}$\\
+
+    \subsubsection{Coordinate system conversion}
+    \[\dd A = \dd x\,\dd y = r\,\dd r\, \dd \theta\]
+    \[\dd V = \dd x\,\dd y\,\dd z = r\,\dd r\,\dd \theta\, \dd z=\rho^2\sin\phi\, \dd \rho\,\dd \theta\,\dd \phi\]\\
+    Cartesian $\leftrightarrow$ Cylindrical coordinate system
+    \[x=r\cos\theta \quad y=r\sin\theta\]
+    \[ \Leftrightarrow\, r = \sqrt{x^2+y^2}\quad \theta =\arctan\frac{y}{x}\]
+    Cartesian $\leftrightarrow$ Spherical coordinate system
+    \[x=\rho\sin\phi\cos\theta \quad y=\rho\sin\phi\sin\theta \quad z=\rho \cos\phi\]
+    \[\Leftrightarrow \rho = \sqrt{x^2+y^2+z^2}\quad\theta =\arctan\frac{y}{x}\quad \phi=\arccos \frac{z}{\sqrt{x^2+y^2+z^2}}\]
+
+    \subsubsection{Center of Mass}
+
+    \noindent Total mass \qquad \qquad \qquad \qquad\,\, $\displaystyle M = \iint\limits_R \rho(x,y)\, dA$
+
+    \noindent Moment about the $x$-axis \qquad $\displaystyle M_x = \iint\limits_R y\,\rho(x,y)\, dA$
+
+    \noindent Moment about the $y$-axis \qquad $\displaystyle M_y = \iint\limits_R x\,\rho(x,y)\, dA$
+
+    \noindent Center of mass \quad \qquad\qquad\,\,\,\,\quad$\displaystyle \bar{x} = \frac{M_y}{M}, \qquad
+    \bar{y} = \frac{M_x}{M}$
+
+
+    \end{multicols}
+    \end{document}
