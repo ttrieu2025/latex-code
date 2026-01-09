@@ -1,0 +1,613 @@
+% Template Source: Dave Richeson (divisbyzero.com), Dickinson College
+
+\documentclass[10pt,landscape]{article}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{xfrac}
+\usepackage{physics}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{tabularx}
+\usepackage{graphicx}
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+% -----------------------------------------------------------------------
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{center}
+     \Large{\textbf{UBC MATH 256: Differential Equations}} \\
+\end{center}
+
+\setlength{\columnseprule}{0.4pt}
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\subsection*{Fundamental Set of Solutions}
+Wronskian Matrix
+\[
+W[y_1,y_2](t) =\det
+\begin{bmatrix}
+y_1(t) & y_2(t) \\
+y_1'(t) & y_2'(t)
+\end{bmatrix}\]
+$W(t)\ne 0 \,\, \text{for some } t_0 \in I\Rightarrow y_1, y_2$ form a fundamental set of solutions. 
+
+\subsection*{1. First-Order Linear ODE}
+    \textbf{Constant-coefficient}\qquad$y'+ay=0$\\
+General solution \qquad \,\,\,\qquad $y(t) = Ce^{-at}$\\
+Inhomogeneous\qquad \qquad\,\,\,\,\, $y'(t) + p(t)y(t) = g(t)$\\
+Integrating factor \[ \displaystyle y(t) = \frac{1}{\mu(t)}\left[ \int^t \mu(s)g(s) \dd s+C\right ], \mu(t) = e^{\int^tp(s)\dd s} \]
+
+\subsection*{2. Second-Order Linear ODE}
+    \textbf{Constant-coefficient}\qquad $ay''+by'+ cy=0$\\
+    Characteristic Equation \qquad $ar^2+br+c=0$\\
+    General Solution
+    \begin{align*}
+    &\Delta > 0:\,r_1 < r_2 && y(t) = c_1 e^{r_1 t} + c_2 e^{r_2 t} \\[1pt]
+    &\Delta = 0:\, r_1 = r_2 && y(t) = (c_1 + c_2 t)e^{r t}\\[1pt]
+    &\Delta < 0:\,r = \lambda \pm \mu i && 
+    y(t) = e^{\lambda t}\big(c_1 \cos(\mu t) + c_2 \sin(\mu t)\big)
+    \end{align*}
+
+    \textbf{Euler's Equation} \qquad \qquad $at^2y''+bty'+cy=0$\\
+    Characteristic equation \qquad $ak(k-1)+bk+c=0$\\
+    General Solution
+    \begin{align*}
+    &\Delta > 0:\, k_1<k_2 &&y(t) = c_1t^{k_1}+c_2 t^{k_2}\\
+    &\Delta = 0:\, k_1=k_2\, &&y(t) = t^k(c_1+c_2\ln t )\\
+    &\Delta < 0:\, k= \alpha \,\pm\, \beta i &&y(t) = t^\alpha ( c_1 \cos(\beta \ln t)  + c_2\sin(\beta \ln t))
+    \end{align*}
+
+\subsubsection{Method of Undetermined Constants \\($1^\text{st}$ \text{and} $2^\text{nd}$ ODEs)}
+\begin{center}{$\displaystyle ay''+ by'+cy = g(t)$}
+\begin{tabular}{c | c}
+\\
+\textbf{$g(t)$} & \textbf{$y_p(t)$} \\[6pt]
+$\displaystyle \sum_{i=0}^n b_i t^i$
+& $\displaystyle \sum_{i=0}^n c_i t^i$ \\[6pt]
+
+$e^{bt}$
+& $A e^{bt}$\\[6pt]
+
+$\sin(bt)\ \text{or}\ \cos(bt)$
+& $A\sin(bt) + B\cos(bt)$ \\[2pt]
+
+Product of above
+& Product of above \\[2pt]
+
+Linear combinations of above
+& Linear combinations of above\\
+\end{tabular}
+\end{center}
+Resonance: When $g(t)$ is a solution of the corresponding homogeneous equation. Multiply $g(t)$ by the term $t$ or $t^2$.
+ 
+\subsubsection{Reduction of Orders} 
+    To find a general solution of a second-order, linear ODE 
+    \[y'' +p(t)y' +q(t)y = g(t)\]
+    1. Find one particular solution $y_1$ of the ODE \\
+    \[\displaystyle y_1'' +p(t)y_1' +q(t)y_1 = 0\]
+    2. Find a solution $y$ in the form of \[y(t) = u(t)y_1(t)\]\\
+    3. Compute $y'=uy_1'+u'y_1$ and $y''= uy_1''+2u'y'_1+u''y_1$\\
+    4. Substitute in $y''+py'+qy= (2y_1'+py_1)u' + (y_1)u''$. After substitution, the $u$ terms cancel.\\
+    5. Let $A(t) = u'$ then the equation becomes a $1^\text{st}$ linear ODE \[\displaystyle A'(t) + \left(2\frac{y_1'}{y_1}+p\right)A(t) = \frac{g}{y_1}\]\\
+    6. Solve by integrating factor \[\displaystyle \mu(t) = \exp\left( \int^t \left( 2\frac{y_1'(s)}{y_1(s)} + p(s) \right) ds \right)\]\\
+    7. General solution \[\displaystyle y(t) = c_1 y_1(t) + y_1(t) \left( \int^t \left[ \frac{1}{\mu(s)} 
+         \int^s \mu(\tau) \frac{g(\tau)}{y_1(\tau)} \, \dd\tau \right] \dd s \right)\]
+
+\subsubsection{Phase Plane}
+\begin{tabularx}{\linewidth}{l X X}
+\(\lambda_1 \neq \lambda_2 < 0\) & Stable Node & Trajectories move straight into origin  \\
+\(\lambda_1 \neq \lambda_2>0\) & Unstable node & Trajectories move straight out from origin \\
+\(\lambda_1 < 0 < \lambda_2\) & (Unstable) Saddle & Approaches along one axis, diverges along other \\
+\(\lambda =  \alpha \pm \beta i, \alpha <0 \) & Stable Spiral & Spirals inward toward origin \\
+\(\lambda = \alpha \pm \beta i, \alpha >0 \) & Unstable Spiral & Spirals outward from origin\\
+\(\lambda=\pm \beta i \) & Center & Circular trajectories \\
+\(\lambda_1 = 0, \lambda_2 < 0\) & Stable line & Line of equilibria, others decay toward it \\
+\(\lambda_1 = 0, \lambda_2 > 0\) & Unstable Line & Line of equilibria, others diverge\\
+\end{tabularx}
+
+\subsubsection{Laplace Transform}
+Definition $\displaystyle \mathcal{L}[f(t)](s) = \int_0^\infty e^{-st}f(t) \dd t $\\[8pt]
+Delta Function $\displaystyle\int_{-\infty}^\infty f(t)\delta (t-t_0)\, \dd t = f(t_0)$ \\
+
+
+\subsubsection{Laplace Transform Table}
+\resizebox{\columnwidth}{!}{%
+\begin{tabularx}{\columnwidth}{l X X}
+$\boldsymbol{f(t)}$ & $\boldsymbol{\textbf{F}(s)}$ \\[6pt]
+
+
+$\delta(t-a)$ &
+$e^{-as}$ \\[6pt]
+
+$1,\ u_0(t)$ &
+$\displaystyle \frac{1}{s}$ \\[6pt]
+
+$t,\ tu_0(t)$ &
+$\displaystyle \frac{1}{s^2}$ \\[6pt]
+
+$u_a(t), u(t-a)$ &
+$\displaystyle \frac{e^{-as}}{s}$\\[6pt]
+
+$u_a(t)f(t-a), u(t-a)f(t-a)$&
+$e^{-as}\text{F}(s)$\\[6pt]
+
+$e^{-a t}$ &
+$\displaystyle \frac{1}{s+a}$ \\[6pt]
+
+
+$t^n$ &
+$\displaystyle\frac{n!}{s^{n+1}}$ \\[6pt]
+
+$te^{-a t}$ &
+$\displaystyle\frac{1}{(s+a)^2}$ \\[6pt]
+
+$e^{-\alpha t}\sin(\beta t)$ &
+$\displaystyle \frac{\beta}{(s+\alpha)^2+\beta^2}$ \\[6pt]
+
+$e^{-\alpha t}\cos(\beta t)$ &
+$\displaystyle\frac{s+\alpha}{(s+\alpha)^2+\beta^2}$ \\[6pt]
+
+$t^n e^{-a t}$ &
+$\displaystyle\frac{n!}{(s+a)^{n+1}}$ \\[8pt]
+
+$f'(t)$ &
+$s\text{F}(s)-f(0)$ \\[6pt]
+
+$f''(t)$ &
+$s^2\text{F}(s)-sf(0)-f'(0)$ \\[6pt]
+
+$(-t)^n f(t)$ &
+$\text{F}^{(n)}(s)$ \\[6pt]
+
+$\displaystyle\int_0^t f(\tau)\,\dd\tau$ &
+$\displaystyle \frac{\text{F}(s)}{s}$ \\[8pt]
+
+$\displaystyle\int_0^t f(t-\tau)g(\tau)\,\dd\tau$ &
+$\text{G}(s)\text{F}(s)$ \\[8pt]
+
+$f(t-\tau)$ &
+$e^{-\tau s}\text{F}(s)$ \\[6pt]
+
+$e^{at}f(t)$ &
+$\text{F}(s-a)$ \\[6pt]
+
+$f(at)$ &
+$\displaystyle \frac{1}{a}\text{F}\left(\frac{s}{a}\right)$
+\end{tabularx}}
+
+\subsection{Fundamental Set of Solutions (revisit)}        
+Fundamental matrix \qquad\quad$\Phi (t)= [\vec{x}_1(t)\quad \vec{x}_2(t)\quad ...\quad \vec{x}_n(t)] 
+$\[\qquad\qquad\qquad\qquad\qquad= \left[\begin{matrix}
+        x_{11}(t) & x_{12}(t) &... &x_{1n}(t)\\
+        x_{21}(t) & x_{22}(t) &... &x_{2n}(t)\\
+        ... & ... &... &...\\
+        x_{n1}(t) & x_{n2}(t) &... &x_{nn}(t)\\
+        \end{matrix}\right]\]\\[4pt]
+General Wronskian matrix \quad $W[\vec{x}_1(t),\vec{x}_2(t), ...,\vec{x}_n(t)] = \det\Phi (t)$\\
+$W(t)\ne 0\Rightarrow\vec{x}_1,\vec{x}_2, ...,\vec{x}_n$ form a fundamental set of solutions. 
+
+\subsection{3. Linear system of ODEs}
+\subsubsection*{a.  Linear systems of First-order ODEs}
+\textbf{Constant-coefficient} \qquad \qquad \quad$\vb{x'}(t) = A\vb{x}$\\
+Characteristic Equation\qquad \qquad \quad $\det(A-\lambda I)=0$\\
+General solution $\forall\, \lambda_1, \lambda_2\in\mathbb{R}$ \qquad \,\,$x(t) = e^{\lambda _1t}\vb{v}_1 + e^{\lambda _2 t}\vb{v}_2$\\[6pt]
+General solution $\forall\,\lambda = \alpha \pm \beta i,\lambda \in \mathbb{C}$ \qquad \,\,
+\[
+\vb{x}(t)
+= e^{\alpha t}\left(c_1
+\begin{bmatrix}
+\cos(\beta t)\\
+\sin(\beta t)
+\end{bmatrix}
++ c_2 
+\begin{bmatrix}
+-\sin(\beta t)\\
+\cos(\beta t)
+\end{bmatrix}
+\right)
+\]
+
+\subsubsection*{b. Linear systems of Second-order ODEs}
+    \textbf{Constant-Coefficient} \qquad \qquad \quad$\vb{x''}(t) = A\vb{x}$\\
+    Eigenvalues of $A$\qquad \,\,\,\,\,\,\qquad \qquad \quad $\det(A-\lambda I)=0$\\
+    \textbf{Step 1.} Solve homogeneous system 
+    \[
+    \mathbf{x}'' = A \mathbf{x} \quad \Rightarrow \quad \text{for each eigenvalue } \lambda \text{ of } A, 
+    \textbf{ solve } x'' = \lambda x.
+    \]
+    General solution for each eigenvalue
+    \[
+    \mathbf{x}_i(t) =
+    \begin{cases}
+    c_1 e^{\sqrt{\lambda_i}t }\mathbf{v}_i + c_2 e^{-\sqrt{\lambda_i} t} \mathbf{v}_i, & \lambda_i > 0,\\[2mm]
+    (c_1 + c_2t)\mathbf{v}_i, & \lambda_i =0\\[2mm]
+    c_1 \cos\big(\sqrt{-\lambda_i}\, t\big) \mathbf{v}_i + c_2 \sin\big(\sqrt{-\lambda_i}\, t\big) \mathbf{v}_i, & \lambda_i < 0.
+    \end{cases}
+    \]
+
+\textbf{Step 2.} Find general solution
+    \[ \mathbf{x}(t) = \sum_i \mathbf{x_i}(t) \]
+
+\subsubsection{Method of Undetermined Constants \\(system of ODEs)}
+    \begin{center}{$\displaystyle \vb{x'}(t) = A \vb{x} + \vb{f}(t)$}
+        \begin{tabular}{ c | c }
+        $\vb{f}(t)$ & $\vb{x}_p(t)$\\ 
+        $\displaystyle \text{const } \vb{b}$ & $\displaystyle \text{const }\vb{k}$ \\ 
+        $\displaystyle  \sum_{i=0}^n c_i t^i \vb{b}$ &$\displaystyle\sum_{i=0}^n c_i t^i\vb{k}$\\  
+        $e^{\alpha t}\vb{b}$ & $e^{\alpha t}\vb{k}$\\
+        $\sin(\omega t)\vb{b} \,||\, \cos (\omega t)\vb{b} $ & $\vb{k}_1\sin(\omega t) + \vb{k}_2\cos (\omega t)$\\
+        Product of above & Product of above\\
+        Linear combinations of above & Linear combinations of above
+        \end{tabular}
+        \end{center}
+        Resonance: Multiply the trial solution by the term $(\vb{k} + \alpha t\vb{v})$ while $\vb{v}$ is the eigenvector associated with the resonant eigenvalue. For example, given
+        \[\vb{x}' = \begin{bmatrix}
+        2 & -1\\
+        3 & -2
+        \end{bmatrix}\vb{x} + e^{-t}\begin{bmatrix}
+            2\\
+            1
+        \end{bmatrix}\]
+        Since $e^{-t}$ is a solution of the system of ODEs, we find the eigenvalue and eigenvector corresponding to the function. Particularly, $\lambda_1 = -1 \to \vb{v}_1 =\begin{bmatrix}
+        1 \\
+        3
+        \end{bmatrix}$. So we guess \[\vb{x}_p (t) = e^{-t} \left(\vb{k} + \alpha t\begin{bmatrix}
+        1 \\
+        3\end{bmatrix}\right)\]
+
+\subsubsection{Method of Variation of Parameter}
+Constant-coefficient\qquad $\mathbf{x}' = A\mathbf{x} + \mathbf{f}(t)$\\
+
+\begin{enumerate}
+\item Find a fundamental matrix
+\[\Phi(t) = \big[ \mathbf{x}_1(t)\ \mathbf{x}_2(t)\ \cdots\ \mathbf{x}_n(t) \big].\]
+
+\item Compute the inverse matrix $\Phi^{-1}(t)$.
+
+\item Form the integrand $\displaystyle \Phi^{-1}(t)\mathbf{f}(t)$.
+
+\item Integrate $ \displaystyle \int_{t_0}^{t} \Phi^{-1}(s)\mathbf{f}(s)\,\dd s.$
+
+\item Multiply by $\Phi(t)$
+\[\mathbf{x}_p(t) = \Phi(t)\int_{t_0}^{t} \Phi^{-1}(s)\mathbf{f}(s)\,ds.
+\]
+
+\item Write the general solution
+\[
+\mathbf{x}(t) = \mathbf{x}_p(t) + \Phi(t)\mathbf{c}.
+\]
+
+\item To solve an IVP,  If $\mathbf{x}(t_0)=\mathbf{x}_0$, choose
+\[
+\mathbf{c} = \Phi^{-1}(t_0)\mathbf{x}_0.
+\]
+\end{enumerate}
+Ex: Solve the system
+\[
+\mathbf{x}' =
+\begin{bmatrix}
+-2 & 1 \\
+1 & -2
+\end{bmatrix}
+\mathbf{x}
++
+\begin{bmatrix}
+2e^{-t} \\
+3t
+\end{bmatrix}
+\]
+\textbf{Step 1.} Eigenvalues and eigenvectors
+\[
+\det(A - rI) = (r+2)^2 - 1 = 0
+\quad \Rightarrow \quad r_1=-3,\; r_2=-1.
+\]
+
+The corresponding eigenvectors:
+\[
+\mathbf{v}_1 =
+\begin{bmatrix}
+1 \\ -1
+\end{bmatrix},
+\quad
+\mathbf{v}_2 =
+\begin{bmatrix}
+1 \\ 1
+\end{bmatrix}.
+\]
+\textbf{Step 2.} Fundamental matrix
+\[
+\Phi(t) =
+\begin{bmatrix}
+e^{-3t} & e^{-t} \\
+- e^{-3t} & e^{-t}
+\end{bmatrix}.
+\]
+\textbf{Step 3.} Inverse of the fundamental matrix
+\[
+\Phi^{-1}(t)
+=
+\frac{1}{2}
+\begin{bmatrix}
+e^{3t} & -e^{3t} \\
+e^{t} & e^{t}
+\end{bmatrix}.
+\]
+
+\textbf{Step 4.} Compute $\Phi^{-1}(t)\mathbf{f}(t)$
+\[
+\Phi^{-1}(t)\mathbf{f}(t)
+=
+\frac{1}{2}
+\begin{bmatrix}
+e^{3t} & -e^{3t} \\
+e^{t} & e^{t}
+\end{bmatrix}
+\begin{bmatrix}
+2e^{-t} \\
+3t
+\end{bmatrix}
+=
+\frac{1}{2}
+\begin{bmatrix}
+2e^{2t} - 3t e^{3t} \\
+2 + 3t e^{t}
+\end{bmatrix}.
+\]
+
+\textbf{Step 5.} Integrate
+\begin{align*}
+\int_0^t \Phi^{-1}(s)\mathbf{f}(s)\,\dd s
+&=
+\frac{1}{2}
+\int_0^t
+\begin{bmatrix}
+2e^{2s} - 3s e^{3s} \\
+2 + 3s e^{s}
+\end{bmatrix}
+\dd s\\
+&=
+\frac{1}{2}
+\begin{bmatrix}
+e^{2t} - \left(t - \frac{1}{3}\right)e^{3t} \\
+2t + 3(t-1)e^{t}
+\end{bmatrix}+\frac{1}{2}\begin{bmatrix}
+    \sfrac{-4}{3}\\
+    2
+\end{bmatrix}.
+\end{align*}
+
+\text{Step 6.} Find the general solution, noticed that the constant vector can be absorbed into $\mathbf{c}$, so
+\begin{align*}
+\mathbf{x}(t)&= \Phi(t)
+\int_0^t \Phi^{-1}(s)\mathbf{f}(s)\,\dd s \\
+&=\frac{1}{2}\Phi(t)
+\begin{bmatrix}
+e^{2t} - \left(t - \frac{1}{3}\right)e^{3t} \\
+2t + 3(t-1)e^{t} 
+\end{bmatrix} +\Phi(t)\mathbf{c}
+\end{align*}
+
+with $
+\Phi(t) =
+\begin{bmatrix}
+e^{-3t} & e^{-t} \\
+- e^{-3t} & e^{-t}
+\end{bmatrix}.$ \\[6pt]
+Therefore, we the multiplication and yield
+\[ \mathbf{x}(t)=
+\begin{bmatrix}
+\left(t+\frac{1}{2}+c_2\right)e^{-t} + t - \frac{4}{3} + c_1 e^{-3t} \\
+\left(t-\frac{1}{2}+c_2\right)e^{-t} + 2t - \frac{5}{3} - c_1 e^{-3t}
+\end{bmatrix}
+\]
+
+\subsubsection{Eigenvalues and Eigenfunctions}
+    Equation $y'' + \lambda y = 0$ \\[6pt]
+    \textbf{Dirichlet BCs} $y(0) = 0 = y(L)$ \\[6pt]
+    Eigenvalues \quad \,\,\,$\displaystyle \lambda_n = \left(\frac{n\pi}{L}\right)^2, n = 1,2,3,...$    \\[6pt]
+    Eigenfunctions \,\,$\displaystyle y_n(x) = \sin\left(\frac{n\pi}{L}x\right) $    \\[6pt]
+    \textbf{Neumann BCs} $y'(0) = 0 = y'(L)$ \\[6pt]
+    Eigenvalues \quad \,\, \,$\displaystyle \lambda_n = \left(\frac{n\pi}{L}\right)^2, n = \textbf{0},1,2,3,...$    \\[6pt]
+    Eigenfunctions \,\,$\displaystyle y_n(x) = \cos\left(\frac{n\pi}{L}x\right) $\\[6pt]
+    \textbf{Orthogonality of eigenfunctions}\\
+    We have two ODEs $(B_1)$ and $(B_2)$ respectively
+    \begin{align*}
+    &(B_1)\, y'' + \lambda y=0,&y(a)=0 =y(b)\\
+    &(B_2)\, y'' + \lambda y=0,&y'(a) = 0=y'(b)
+    \end{align*}
+    Let $y_1$ and $y_2$ be eigenfunctions of $(B_1)$ (or $(B_2)$ with eigenvalues $\lambda_1\ne\lambda_2$ then
+    \[\int_a^by_1(x)y_2(x)\dd x=0.\]
+    \textbf{Consequences}
+    \begin{enumerate}
+        \item $\displaystyle \int_{0}^{L}
+\sin\!\left(\frac{m\pi x}{L}\right)
+\sin\!\left(\frac{n\pi x}{L}\right)\,dx
+=
+\begin{cases}
+0, & m\neq n,\\[6pt]
+\dfrac{L}{2}, & m=n.
+\end{cases}$
+        \item $\displaystyle \int_{0}^{L}
+\cos\!\left(\frac{m\pi x}{L}\right)
+\cos\!\left(\frac{n\pi x}{L}\right)\,dx
+=
+\begin{cases}
+0, & m\neq n,\\
+L, & m=n=0,\\
+\dfrac{L}{2}, & m=n\neq 0.
+\end{cases}
+$
+        \item $\displaystyle \int_{0}^{L}
+\sin\!\left(\frac{m\pi x}{L}\right)
+\cos\!\left(\frac{n\pi x}{L}\right)\,dx
+=
+0
+\quad \forall\, m,n.$
+    \end{enumerate}
+
+
+
+\subsubsection{Fourier Series}
+
+\, $f(x)=\displaystyle \frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n \cos\left(\frac{n\pi x}{L}\right) + b_n \sin\left(\frac{n\pi x}{L}\right)\right]$\\[6pt]
+\qquad $\displaystyle a_0 = \displaystyle \frac{1}{L}\int_{-L}^L f(x)\,\dd x$\\[10pt]
+\qquad $\displaystyle a_n = \frac{1}{L}\int_{-L}^L f(x) \cos\left(\frac{n\pi x}{L}\right)\, \dd x$ \\[10pt]
+\qquad $\displaystyle b_n = \frac{1}{L}\int_{-L}^L f(x) \sin\left(\frac{n\pi x}{L}\right)\, \dd x$\\[10pt]
+\textbf{Odd - Even characteristics}\\[2pt]
+\qquad If $f$ is odd $\Rightarrow a_n = 0$\\
+\qquad If $f$ is even $\Rightarrow b_n = 0$\\
+
+
+\subsection{4. Partial Differential Equations}
+    
+    \subsubsection{Heat Equation}
+    $\begin{cases} u_t = \alpha^2 u_{xx}, \quad 0 < x < L, \quad t > 0\\
+    u(x,0) = f(x)\\
+    \end{cases}$ \\[6pt]
+    Separation form \qquad $u(x,t) = X(x)T(t)$
+    \[\Rightarrow \frac{X''(x)}{ X(x)}=\frac{T'(t)}{\alpha T(t)} = -\lambda\]
+    \textbf{Dirichlet BCs}\,\textbf{[}$u(0,t) = 0 = u(L,t)$\textbf{]}  \\
+    \,\,$\displaystyle u(x,t) =\sum_{n=1}^\infty b_n e^{-(n \pi \alpha/L)^2 t} \sin\left(\frac{n\pi x}{L}\right) $\\[6pt]
+     \qquad$\displaystyle b_n = \frac{2}{L}\int_0^L f(x)\sin\left(\frac{n\pi x}{L}\right)\, \dd x$\\[10pt]    
+     \textbf{Neumann BCs}\,\textbf{[}$u_x(0,t) = 0 = u_x(L,t)$\textbf{]} \\
+     \,\,$\displaystyle  u(x,t) = \frac{c_0}{2} + \sum_{n=1}^\infty c_n e^{-(n \pi \alpha/L)^2 t} \cos\left(\frac{n\pi x}{L}\right)$\\[6pt]
+     \qquad $\displaystyle c_0 = \frac{2}{L}\int_0^Lf(x)\, \dd x$
+     \qquad $\displaystyle \displaystyle c_n = \frac{2}{L} \int_0^L f(x)\cos\left(\frac{n\pi x}{L}\right) \mathrm{d} x$\\[10pt]
+     Inhomogeneous\qquad $u_t = \alpha^2 u_{xx} + f(x)$.
+
+     
+     \textbf{Step 1.} Find steady-state function $u_\text{ss}$. At a steady state, $u_{t} =0$, so $\displaystyle u_{xx} = -f(x,t)/\alpha^2$\\
+     \textbf{Step 2.} $u(x,t) = u_\text{ss} + v(x,t)$ with $v(x,t)$ is the solution of the homogeneous heat equation.\\[6pt]
+    \subsubsection{Wave Equation}
+    $\begin{cases}y_{tt} = c^2 y_{xx}, \quad 0 < x < L, \quad t > 0\\
+    y(x,0) = f(x)\\
+    y_t(x,0) = g(x)\\
+    \end{cases}$\\[10pt]
+    Separation form \qquad $y(x,t) = X(x)T(t)$\\
+    \[\Rightarrow \frac{X''(x)}{ X(x)}=\frac{T'(t)}{c^2T(t)} = -\lambda\]
+    \textbf{Dirichlet BCs}\,\textbf{[}$y(0,t) = 0 = y(L,t)$\textbf{]} \\[6pt]
+    \,\,$\displaystyle y (x,t)=\sum_{n=1}^\infty \left[a_n \sin\left(\frac{n\pi ct}{L}\right) +b_n\cos\left(\frac{n\pi ct}{L}\right)\right]\sin\left(\frac{n\pi x}{L}\right) $\\[10pt]
+    
+    \qquad$\displaystyle a_n = \frac{2}{n\pi c}\int_0^L g(x)\sin\left(\frac{n\pi x}{L}\right)\, \dd x$\\[10pt]
+    \qquad$\displaystyle b_n = \frac{2}{L}\int_0^L f(x)\sin\left(\frac{n\pi x}{L}\right)\, \dd x$\\[10pt]
+     \textbf{Neumann BCs}\,\textbf{[}$y_x(0,t) = 0 = y_x(L,t)$\textbf{]}
+    \,\,\,$\displaystyle y(x,t)=\frac{d_0}{2}+\sum_{n=1}^{\infty}\left[d_n \cos\!\left(\frac{n\pi c t}{L}\right)+
+e_n \sin\!\left(\frac{n\pi c t}{L}\right)\right]
+\cos\!\left(\frac{n\pi x}{L}\right)$\\[10pt]
+    \qquad $\displaystyle d_0 = \frac{2}{L}\int_0^L f(x)\,\dd x$\\[10pt]
+    \qquad $\displaystyle d_n = \frac{2}{L}\int_0^L f(x) \cos\!\left(\frac{n\pi x}{L}\right)\,\dd x$\\[10pt]
+    \qquad$\displaystyle
+    e_n = \frac{2}{n\pi c}\int_0^L g(x)
+    \cos\!\left(\frac{n\pi x}{L}\right)\,\dd x$\\[10pt]
+    
+    \textbf{D'Alembert formula} $(-\infty<x<\infty)$\\[6pt] 
+    \,\,\,$\displaystyle y(x,t)= \frac{1}{2}[f(x-ct) + f(x+ct)] + \frac{1}{2c}\int_{x-ct}^{x+ct}g(s) \dd s$\\[10pt]
+
+    \subsubsection{Laplace's Equation} $\begin{cases} u_{xx}+u_{yy} =0, 0< x<a, 0 <y<b\\
+    u(0,y) = 0 = u(a,y), 0\le y \le b\\
+    u(x,b) = 0, 0\le x\le a 
+    \end{cases}$\\[6pt]
+    Separation form \qquad $u(x,y) = X(x)Y(y)$\\[6pt]
+    \textbf{Dirichlet BCs} $\textbf{[}u(x,0) = f(x)\textbf{]}$ \\
+    \[\Rightarrow -\frac{X''(x)}{X(x)}=\frac{Y'(y)}{Y(y)} = \lambda\]
+    \,$u(x,y) = \displaystyle \sum_{n=1}^{\infty} b_n\sin\left(\frac{n\pi x}{a}\right)\frac{\sinh\left(\frac{n\pi (b-y)}{a}\right)}{\sinh\left(\frac{n\pi b}{a}\right)}$\\[4pt]
+    \qquad $ \displaystyle b_n = \frac{2}{a}\int_{0}^{a} f(x)\sin\left(\frac{n\pi x}{a}\right) \dd x$\\[10pt]
+    \textbf{Neumann BCs} $\textbf{[}u_y(x,0) = f(x)\textbf{]}$ \\[4pt]
+    \,$u(x,y) = \displaystyle \sum_{n=1}^\infty c_n \sin\left(\frac{n\pi x}{a}\right)\sinh\left(\frac{n\pi (b-y)}{a}\right)$\\
+    \qquad $c_n = \displaystyle\frac{-2}{n\pi\cosh(\frac{n\pi b}{a})}\int_0^af(x)\sin\left(\frac{n\pi x}{a}\right)$
+
+
+\subsection{6. Linear Algebra}
+Determinant \[\det \begin{bmatrix}
+    a & b\\
+    c & d\\ \end{bmatrix} = ad-bc\]\\
+Inverse of a matrix 
+\[A=\begin{bmatrix}
+    a & b\\
+    c & d\\
+\end{bmatrix} \Rightarrow A^{-1} = \frac{1}{\det A} \begin{bmatrix}
+    d & -b\\
+    -c & a\\
+    \end{bmatrix}\]
+\textbf{Diagonalization}
+\[
+A = P D P^{-1}
+\]
+\[
+D=\begin{bmatrix}
+\lambda_1 & 0\\
+0 & \lambda_2
+\end{bmatrix},
+\qquad
+P=\begin{bmatrix}
+\vert & \vert\\
+\vb{v}_1 & \vb{v}_2\\
+\vert & \vert
+\end{bmatrix}
+\]
+
+Matrix exponential 
+\[
+e^{At} = P e^{Dt} P^{-1},\,
+e^{Dt}=
+\begin{bmatrix}
+e^{\lambda_1 t} & 0\\
+0 & e^{\lambda_2 t}
+\end{bmatrix}
+\]
+    Euler's Formula\qquad $e^{ix} = \cos x + i\sin x$\\
+    Hyperbolic sine\qquad $\displaystyle \sinh(x) = \frac{1}{2}(e^{x}-e^{-x})$\\[6pt]
+    Hyperbolic cosine\,\,\,\, $\displaystyle \cosh(x) = \frac{1}{2}(e^{x}+e^{-x})$
+
+\subsubsection{ODEs and Applications}
+\begin{align*}
+&\text{Newton's Cooling Law}  &&\displaystyle \dv{T}{t} = -k(T-T_\text{env})\\
+&\text{Mass Balance Equation} &&\displaystyle\dv{M}{t}=\text{Q}_{in} C_{in} -\text{Q}_{out}\frac{M(t)}{V(t)}\\
+&&&(\text{C}_\text{in} = 0 \, \text{when water is clean.})  \\
+&\text{RLC circuit} &&\displaystyle L\dv[2]{q}{t} + R\dv{q}{t}+\frac{q}{C} = V(t)\\
+&\text{Spring-dashpot system} &&\displaystyle m\dv[2]{x}{t} + \beta\dv{x}{t}+kx= f(t)
+\end{align*}
+For a $2^\text{nd}$ ODE $ay''+by'+cy=0$,\\
+\begin{align*}
+& \Delta <0 \Leftrightarrow b^2<4ac\Leftrightarrow \text{Underdamped}\\
+& \Delta >0\Leftrightarrow b^2>4ac \Leftrightarrow \text{Overdamped}\\
+& \Delta =0\Leftrightarrow b^2=4ac \Leftrightarrow \text{Critically damped}
+\end{align*}
+
+\end{multicols}
+
+\end{document}
