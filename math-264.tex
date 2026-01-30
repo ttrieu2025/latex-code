@@ -1,4 +1,3 @@
-
 \documentclass[10pt]{article}
 \usepackage{amssymb,amsmath,amsthm,amsfonts}
 \usepackage{multicol,multirow}
@@ -46,6 +45,7 @@
 \begin{document}
 
 \raggedright
+\footnotesize
 
 
 
@@ -73,22 +73,46 @@ Cross Product \hfill$\displaystyle \vb{u} \times \vb{v} = \begin{vmatrix}
  \vb{a}_x & \vb{a}_y & \vb{a}_z\\
  u_x & u_y & u_z\\
  v_x & v_y & v_z
-\end{vmatrix}\qquad\qquad\qquad\qquad\quad\,$\\[4pt]
+\end{vmatrix}\qquad\qquad\qquad\qquad\quad\,$
 
-Projection\hfill $\text{proj}_{\vb{u}}(\vb{F}) = \displaystyle\left(\frac{\vb{F} \cdot \vb{u}}{\vb{u} \cdot \vb{u}}\right)\vb{u}\qquad\qquad\qquad\qquad\,\,\,\,$
+\subsection*{Distance and Projection}
+
+Distance from $(x_0, y_0, z_0)$ to plane $Ax + By + Cz +D= 0$
+
+\[d = \frac{|Ax_0 + By_0 + Cz_0+ D|}{\sqrt{A^2 + B^2 + C^2}}\]
+
+Distance from $(x_0, y_0, z_0)$ to the line pass through $(x_1,y_1,z_1)$ with direction $\langle a,b,c\rangle$
+
+\[d = \frac{1}{\sqrt{a^2 + b^2 + c^2}}
+\left\lVert
+\begin{vmatrix}
+\vb{i} & \vb{j} & \vb{k} \\
+x_0-x_1 & y_0-y_1 & z_0-z_1 \\
+a & b & c
+\end{vmatrix}
+\right\rVert
+\]
+
+Projections\hfill $\text{proj}_{\vb{u}}(\vb{F}) = \displaystyle\left(\frac{\vb{F} \cdot \vb{u}}{\vb{u} \cdot \vb{u}}\right)\vb{u}\qquad\qquad\qquad\qquad\,\,\,\,$
 
 
 \subsection*{Parameterization}
-Arc Length \hfill$\displaystyle \int_{a}^{b} ||\vb{r}'(t)||\, \dd t\qquad\qquad\qquad\qquad\qquad\qquad\,\,\,\,\,$\\[4pt]
+Arc Length \hfill$\displaystyle \int_{a}^{b} ||\vb{r}'(t)||\, \dd t\qquad\qquad\qquad\qquad\qquad\qquad\,\,\,\,$\\[4pt]
 
-Surface Area \hfill$\displaystyle\iint\limits_D \left|\left|\vb{r}_{u}\times\vb{r}_{v}\right|\right| \,\dd u\,\dd v\qquad\qquad\qquad\quad\qquad\quad$\\[4pt]
+Surface Area \hfill$\displaystyle\iint_D \left|\left|\pdv{\vb{r}}{u}\times\pdv{\vb{r}}{v}\right|\right| \,\dd u\,\dd v\qquad\qquad\,\,\qquad\qquad$\\[4pt]
 
-Line Integral\hfill$\displaystyle \int_C \vb{F} \cdot \dd \vb{r} = \int_a^b \vb{F}(\vb{r}(t)) \cdot \vb{r}'(t)\, \dd t\qquad\qquad\quad\,$\\[8pt]
+Line Integral\hfill$\displaystyle \int_C \vb{F} \cdot \dd \vb{r} = \int_a^b \vb{F}(\vb{r}(t)) \cdot \vb{r}'(t)\, \dd t\qquad\qquad\quad$\\[8pt]
 
-Surface Integral\hfill$\displaystyle \iint \limits_S\vb{F}\cdot \dd\vb{S}=\iint
-\limits_D \vb{F}(\vb{r}(u,v))\cdot \left(\vb{r}_{u}\times\vb{r}_v\right)\dd u\,\dd v$
+Surface Integral\hfill$\displaystyle \int_S\vb{F}\cdot \dd\vb{S}=\iint_D \vb{F}(\vb{r}(u,v))\cdot (\vb{r}_u\times\vb{r}_v)\dd u\,\dd v$
 
 \normalsize
+
+\subsection*{Surface Normals and Area Elements}
+
+
+Level Surface\,\,$F(x, y, z) = 0$\hfill $\vb{n} = \pm\nabla F(x, y, z)\qquad\quad,$\\[4pt]
+
+Parametric Surface \,$\vb{r}(u, v)$ \hfill$\dd\vb{S} = \displaystyle \pm\left(\pdv{\vb{r}}{u} \times \pdv{\vb{r}}{v}\right) \,\dd u\, \dd v$
 
 
 \normalsize
