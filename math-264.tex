@@ -79,19 +79,46 @@ Projection\hfill $\text{proj}_{\vb{u}}(\vb{F}) = \displaystyle\left(\frac{\vb{F}
 
 
 \subsection*{Parameterization}
-Arc Length \hfill$\displaystyle \int_C\dd s=\int_{a}^{b} ||\vb{r}'(t)||\, \dd t\qquad\qquad\qquad\qquad\quad\,$\\[4pt]
+Arc Length \hfill$\displaystyle \int_C\dd s=\int_{a}^{b} ||\vb{r}'(t)||\, \dd t\qquad\qquad\qquad\qquad\quad\,\,\,$\\[4pt]
 
-Surface Area \hfill$\displaystyle \iint_S \dd S=\iint\limits_D \left|\left|\vb{r}_{u}\times\vb{r}_{v}\right|\right| \,\dd u\,\dd v\qquad\qquad\quad\,\,\,$\\[4pt]
+Surface Area \hfill$\displaystyle \iint_S \dd S=\iint\limits_D \left|\left|\vb{r}_{u}\times\vb{r}_{v}\right|\right| \,\dd u\,\dd v\qquad\qquad\quad\,\,\,\,\,$\\[4pt]
 
-Line Integral\hfill$\displaystyle \int_C \vb{F} \cdot \dd \vb{r} = \int_a^b \vb{F}(\vb{r}(t)) \cdot \vb{r}'(t)\, \dd t\qquad\qquad\quad\,\,$\\[8pt]
+Line Integral\hfill$\displaystyle \int_C \vb{F} \cdot \dd \vb{r} = \int_a^b \vb{F}(\vb{r}(t)) \cdot \vb{r}'(t)\, \dd t\qquad\qquad\quad\,\,\,$\\[8pt]
 
 Surface Integral\hfill$\displaystyle \iint \limits_S\vb{F}\cdot \dd\vb{S}=\iint
 \limits_D \vb{F}(\vb{r}(u,v))\cdot \left(\vb{r}_{u}\times\vb{r}_v\right)\dd u\,\dd v$
 
-\normalsize
+\subsection*{Frenet-Serret Formula}
+
+Curve \hfill $\displaystyle \vb{r}(t) = x(t)\,\vb{a}_x+ y(t)\, \vb{a}_y + z(t)\,\vb{a}_z\qquad \,\,\,\,$\\[4pt]
+
+Arc length \hfill $s=\displaystyle\int_{t_0}^t ||\vb{v}||\,\dd t \qquad \qquad\qquad\qquad\qquad\,\,\,$\\[4pt]
+
+Velocity \hfill $\displaystyle \vb{v} = \dv{\vb{r}}{t}\qquad \qquad\qquad\qquad\qquad\qquad\quad\,\,$\\[4pt]
+
+Unit tangent \hfill $\displaystyle \widehat{\vb{T}} = \frac{\vb{v}}{||\vb{v}||}\qquad \qquad\qquad\qquad\qquad\qquad\,\,\,$\\[4pt]
+
+Acceleration \hfill $\displaystyle \vb{a} = \dv{\vb{v}}{t} = \dv[2]{\vb{r}}{t}\qquad \qquad\qquad\qquad\qquad\,$\\[4pt]
+
+Binormal \hfill $\displaystyle \widehat{\vb{B}} = \frac{\vb{v}\times \vb{a}}{||\vb{v}\times\vb{a}||}\qquad \qquad\qquad\qquad\qquad\,\,\,\,$\\[4pt]
+
+Curvature\hfill
+$\displaystyle \kappa =\frac{||\vb{v}\times \vb{a}||}{||\vb{v}||^3}\qquad \qquad\qquad\qquad\qquad\,\,\,\,\,$\\[4pt]
 
 
-\normalsize
+Radius of Curvature\hfill 
+$\rho = \dfrac{1}{\kappa}\qquad \qquad\qquad\qquad\qquad\qquad\quad\,\,\,\,\,$\\[4pt]
+
+Normal \hfill $\displaystyle\widehat{\vb{N}}= \widehat{\vb{B}} \times \widehat{\vb{T}}\qquad \qquad\qquad\qquad\qquad\quad\,\,\,$\\[4pt]
+
+Torsion \hfill $\displaystyle \tau = \dfrac{(\vb{v}\times\vb{a})\cdot(\dd \vb{a}/\dd t)}{||\vb{v}\times\vb{a}||^2}\qquad \qquad\qquad\quad\,$\\[4pt]
+
+Frenet-Serret Formulae
+ \[\displaystyle\dv{\widehat{\vb{T}}}{s} = \kappa \widehat{\vb{N}},\quad \displaystyle\dv{\widehat{\vb{N}}}{s} = -\kappa \widehat{\vb{T}}+\tau\widehat{\vb{B}},\quad\displaystyle\dv{\widehat{\vb{B}}}{s} = -\tau \widehat{\vb{N}}\]
+
+
+
+
 
 \subsection*{Cartesian Coordinates $(x,y,z)$}
 
@@ -160,7 +187,7 @@ Gradient Theorem \hfill$\displaystyle \int_C \nabla f \cdot \dd \vb{r} = f(\vb{r
 
 Divergence Theorem\hfill $\displaystyle \iiint_V (\nabla \cdot \vb{F})\, \dd V = \oiint_{\partial V} \vb{F} \cdot \dd \vb{S}$\\[4pt]
 
-Stokes's Theorem \hfill$\displaystyle \oint_C\vb{F} \cdot \dd \vb{r} = \iint_S (\nabla \times \vb{F}) \cdot \dd\vb{S}\quad\,\,\,\,$
+Stokes's Theorem \hfill$\displaystyle \oint_{\partial S} \vb{F} \cdot \dd \vb{r} = \iint_S (\nabla \times \vb{F}) \cdot \dd\vb{S}\quad\,$
 
 
 
