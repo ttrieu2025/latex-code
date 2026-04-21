@@ -16,9 +16,10 @@
     \usepackage{amsmath}
     \usepackage{xfrac}
     \usepackage{physics}
-\usepackage[letterpaper,landscape,margin=0.5in]{geometry}    \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+    \usepackage[letterpaper,landscape,margin=0.5in]{geometry}    \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
     \usepackage{tabularx}
     \usepackage{graphicx}
+    \usepackage{tikz}
     
     \ifthenelse{\lengthtest { \paperwidth = 11in}}
         { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
@@ -29,17 +30,17 @@
     \pagestyle{empty}
     \makeatletter
     \renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                    {-1ex plus -.5ex minus -.2ex}%
-                                    {0.5ex plus .2ex}%x
-                                    {\normalfont\large\bfseries}}
+        {-1ex plus -.5ex minus -.2ex}%
+            {0.5ex plus .2ex}%x
+                {\normalfont\large\bfseries}}
     \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                    {-1explus -.5ex minus -.2ex}%
-                                    {0.5ex plus .2ex}%
-                                    {\normalfont\normalsize\bfseries}}
+        {-1explus -.5ex minus -.2ex}%
+            {0.5ex plus .2ex}%
+                {\normalfont\normalsize\bfseries}}
     \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
-                                    {-1ex plus -.5ex minus -.2ex}%
-                                    {1ex plus .2ex}%
-                                    {\normalfont\small\bfseries}}
+        {-1ex plus -.5ex minus -.2ex}%
+            {1ex plus .2ex}%
+                {\normalfont\small\bfseries}}
     \makeatother
     \setcounter{secnumdepth}{0}
     \setlength{\parindent}{0pt}
@@ -89,15 +90,15 @@
     \textbf{Time Invariance}
     \[\mathcal{S}[x(t)] = y(t)\Rightarrow\mathcal{S}[x(t \pm \tau)] = y(t \pm \tau)\]
     
-    \textbf{Zero-State Response. }Due to the input as the initial conditions are zero.
+    \textbf{Zero-State Response. }Due to the input as the initial conditions are zero.\\[6pt]
     
-    \textbf{Zero-Input Response. }Due to the initial conditions as the input is zero.
+    \textbf{Zero-Input Response. }Due to the initial conditions as the input is zero.\\[6pt]
     
     \textbf{Convolution}
     \[y(t) = \int_{-\infty}^{\infty}x(\tau)h(t-\tau)\,d\tau = \int_{-\infty}^{\infty}x(t-\tau)h(\tau)\,d\tau\]
     
-    \textbf{Causality. }A continuous time system $\mathcal{S}$ is causal if whenever $x(t) = 0$ and there are no initial conditions, $y(t) = 0$ and the output $y(t)$ does not depend on future inputs.
-    \textbf{BIBO Stability. }If an input bounded then the output of a BIBO stable system is bounded.\\
+    \textbf{Causality. }A continuous time system $\mathcal{S}$ is causal if whenever $x(t) = 0$ and there are no initial conditions, $y(t) = 0$ and the output $y(t)$ does not depend on future inputs.\\[6pt]
+    \textbf{BIBO Stability. }If an input bounded then the output of a BIBO stable system is bounded.
     \[\Leftrightarrow \int_{-\infty}^{\infty} \abs{h(t)}\,dt < \infty\]
     
     \section{Laplace Transform}
@@ -127,7 +128,7 @@
     \textbf{Final Value Theorem}\\
     \[\lim_{t\rightarrow\infty} f(t) =\lim_{s\rightarrow 0} sF(s)\]
     
-    \textbf{BIBO Stability. }If the region of convergence contains the $j\omega$-axis then the system is BIBO stable.
+    \textbf{BIBO Stability. }If the region of convergence contains the $j\omega$-axis then the system is BIBO stable.\\[6pt]
     
     \textbf{2-Sided LT from 1-Sided LT}
     \begin{itemize}
@@ -136,7 +137,10 @@
         \item 	$P(t)=\mathcal{L}\left[p_{ac}(-t)u(t)\right]_{(-s)} + \mathcal{L}\left[p_{c}(t)u(t)\right]$
     \end{itemize}	
     
-    \section{Fourier Series}
+    \section{CT Fourier Series}
+
+    \[x(t)=\sum_{k=-\infty}^\infty X_ke^{jk\omega_0 t}\]
+    
     Eigenfunction Property
     \[\mathcal{S}[e^{j\omega_0t}] = H(j\omega_0)e^{j\omega_0t}\]
     \begin{align*}
@@ -169,7 +173,7 @@
     Response of LTI Systems to Periodic Signals. If the input to an LTI system has Fourier Series $x(t) = X_0 + 2\sum_{k=1}^{\infty}\abs{X_k}\cos(k\omega t + \angle X_k)$, then the steady state response is 
     \[ y(t) = X_0\abs{H(j0)} + 2\sum_{k=1}^{\infty}\abs{X_k}\abs{H(jk\omega_0)}\cos(k\omega_0 t + \angle X_k + \angle H(jk\omega_0))\]
     
-    \section{Fourier Transform}
+    \section{CT Fourier Transform}
     \[X(\omega) = \int_{-\infty}^{\infty}x(t)e^{-j\omega t}\,\dd t\]\\
     Inverse Fourier Transform 
     \[x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}\,\dd\omega\]
@@ -182,69 +186,11 @@
     
     Parseval's Energy Relation
     \[ E = \int_{-\infty}^{\infty} \abs{x(t)}^2\,\dd t = \frac{1}{2\pi}\int_{-\infty}^{\infty}\abs{X(\omega)}^2\,\dd\omega\]
+
+    \vspace{12pt}
+
     
-    
-    \section{Sampling Theory}
-     \[x_s(t) = x(nT_s) = x(t)\rvert_{t = nT_s} = x(t)\sum_n \delta(t - nT_s)\]
-    \[X_s(\omega) = \frac{1}{T_s} \sum_{k=-\infty}^{\infty}X(\omega - k\omega_s)\]
-    
-    \textbf{Nyquist-Shannon Sampling Rate}
-     \[\omega_s = \frac{2\pi}{T_s} \geq 2\omega_\text{max}\]
-    \textbf{Aliasing} occurs if\,\, $\omega_s < 2\omega_\text{max}$\\[4pt]
-    \textbf{Reconstruction} $X(\omega)=X_s(\omega)H_\text{lp}(\omega)$:
-    \begin{equation*}
-    \hspace{-8em}
-    H_{\text{lp}}(\omega) =
-    \begin{cases}
-    T_s &  -\dfrac{\omega_s}{2} \leq \omega \leq \dfrac{\omega_s}{2}\\
-    0 & \text{otherwise}
-    \end{cases}
-    \end{equation*}
-    \textbf{Inclusive bounds.} If represented by a unit step function the bounds are inclusive for filters
-    
-    \textbf{Signal Reconstruction from Sinc Interpolation}
-     \[x_r(t) = \sum_{n=-\infty}^{\infty} x(nT_s) \frac{\sin(\pi(t-nT_s)/T_s)}{\pi(t-nT_s)/T_s}\]
-    
-    \section{Discrete Time Signals}
-    \textbf{Definition} $x[n] = x(nT_0)$.
-    \[x[n] = \sum_{k=-\infty}^{\infty}x[k]\delta[n-k]\]
-    
-    \textbf{Periodicity}
-    \[x[n + kN] = x[n] \qquad \forall k\in \mathbb{Z}\]
-    
-    When sampling an analog sinusoid of fundamental period $T_0$, we obtain a periodic discrete sinusoid provided that $m$, $N$ not divisible by each-other,
-    \[\frac{T_s}{T_0} = \frac{m}{N}\]
-    
-    Aliasing occurs if\\
-    \[T_s > T_0/2\]
-    
-    Energy
-    \[E = \sum_{n = -\infty}^{\infty}\abs{x[n]}^2\]
-    
-    Power
-    \[P_x = \lim_{N \rightarrow \infty}\frac{1}{2N + 1}\sum_{n= -N}^{N}\abs{x[n]}^2\]
-    
-    Convolution\\\
-    \[y[n] = \sum_{k = -\infty}^{\infty} x[k]h[n-k]\]
-    
-    Bounded-Input Bounded-Output Stability
-    \[\sum_{n=-\infty}^\infty \abs{h[n]} < \infty\]
-    
-    \section{Z-Transform}
-     \[\mathcal{Z}[x(nT_s)] = \mathcal{L}[x_s(t)]\rvert_{z=e^{sT_s}} = \sum_n x(nT_s)z^{-n}\]
-    
-    Convergence
-     \[|X(z)| = \sum_n \abs{x[n]}r^{-n} < \infty\]
-    
-    Initial Value Theorem
-     \[x[0] = \lim_{z\rightarrow \infty}X(z)\]
-    
-    Final Value Theorem:\\
-     \[\lim_{n\rightarrow \infty}x[n] = \lim_{z\rightarrow 1}(z-1)X(z)\]
-    
-    BIBO Stability. If the ROC contains radius $z=1$, then the system is BIBO stable.
-    
-    \textbf{Basic Properties of Laplace Transforms}
+    \textbf{\normalsize  Basic Properties of Laplace Transforms}
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
     $\textbf{Property}$ & $\boldsymbol{\textbf{t-domain}}$\hfill $\boldsymbol{\textbf{s-domain}}$ \\[6pt]
@@ -289,172 +235,319 @@
     
     
     $\delta(t)$ &
-    $\displaystyle e^{-as},$\hfill whole $s$-plane \\[6pt]
+    $\displaystyle e^{-as}$\hfill whole $s$-plane \\[10pt]
     
     $u(t)$&
-    $\displaystyle \frac{1}{s},$\hfill $\Re[s]>0$  \\[6pt]
+    $\displaystyle \frac{1}{s}$\hfill $\Re[s]>0$  \\[10pt]
     
     $tu(t)$ &
-    $\displaystyle \frac{1}{s^2}$\hfill $\Re[s]>0$   \\[6pt]
+    $\displaystyle \frac{1}{s^2}$\hfill $\Re[s]>0$   \\[10pt]
     
     $t^nu(t)$ &
-    $\displaystyle\frac{n!}{s^{n+1}}$\hfill $\Re[s]>0$  \\[6pt]
+    $\displaystyle\frac{n!}{s^{n+1}}$\hfill $\Re[s]>0$  \\[10pt]
     
     $\sin(\omega t)u(t)$ &
-    $\displaystyle \frac{\omega}{s^2+\omega^2},$\hfill $\Re[s] >0$ \\[6pt]
+    $\displaystyle \frac{\omega}{s^2+\omega^2}$\hfill $\Re[s] >0$ \\[10pt]
     
     $\cos(\omega t)u(t)$ &
-    $\displaystyle\frac{s}{s^2+\omega^2},$\hfill $\Re[s] >0$ \\[6pt]
+    $\displaystyle\frac{s}{s^2+\omega^2}$\hfill $\Re[s] >0$ \\[10pt]
     
     $t\sin(\omega_0 t)u(t)$ &
-    $\displaystyle\frac{2\omega_0 s}{(s^2+\omega_0^2)^2},$\hfill $\Re[s] >0$ \\[6pt]
+    $\displaystyle\frac{2\omega_0 s}{(s^2+\omega_0^2)^2}$\hfill $\Re[s] >0$ \\[10pt]
     
     $t\cos(\omega_0 t)u(t)$ &
-    $\displaystyle\frac{s^2-\omega_0^2}{(s^2+\omega_0^2)^2},$\hfill $\Re[s] >0$ \\[6pt]
+    $\displaystyle\frac{s^2-\omega_0^2}{(s^2+\omega_0^2)^2}$\hfill $\Re[s] >0$ \\[10pt]
     
     $e^{-a t}u(t)$ &
-    $\displaystyle \frac{1}{s+a},$ \hfill $\Re[s]>-a$  \\[6pt]
+    $\displaystyle \frac{1}{s+a}$ \hfill $\Re[s]>-a$  \\[10pt]
     
     $te^{-a t}$ &
-    $\displaystyle\frac{1}{(s+a)^2}$,\hfill $\Re[s]>-a$  \\[6pt]
+    $\displaystyle\frac{1}{(s+a)^2}$\hfill $\Re[s]>-a$  \\[10pt]
     
     $t^n e^{-at}u(t)$ &
-    $\displaystyle\frac{n!}{(s+a)^{n+1}},$\hfill $\Re[s]>-a$  \\[8pt]
+    $\displaystyle\frac{n!}{(s+a)^{n+1}}$\hfill $\Re[s]>-a$  \\[10pt]
     
     $e^{-\alpha t}\sin(\beta t)u(t)$ &
-    $\displaystyle \frac{\beta}{(s+\alpha)^2+\beta^2},$\hfill $\Re[s]>-\alpha$  \\[6pt]
+    $\displaystyle \frac{\beta}{(s+\alpha)^2+\beta^2}$\hfill $\Re[s]>-\alpha$  \\[10pt]
     
     $e^{-\alpha t}\cos(\beta t)u(t)$ &
-    $\displaystyle\frac{s+\alpha}{(s+\alpha)^2+\beta^2},$\hfill $\Re[s]>-\alpha$  \\[6pt]
+    $\displaystyle\frac{s+\alpha}{(s+\alpha)^2+\beta^2}$\hfill $\Re[s]>-\alpha$  \\[10pt]
     
     % $2Ae^{-\alpha t}\cos(\beta t+\theta)u(t)$ &
     % $\displaystyle\frac{A\angle\theta}{s+\alpha-j\beta}+\frac{A\angle-\theta}{s+\alpha+j\beta},$\hfill $\Re[s]>-a$  \\[6pt]
     
+    \end{tabularx}}\\[6pt]
+    \textbf{\normalsize Two-sided Laplace Transforms}\\[6pt]
     
-    
-    \end{tabularx}}\\
-    
-    \textbf{\normalsize Basic Properties of Fourier Series}\\[6pt]
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
-    $\textbf{Property}$ & $\boldsymbol{\textbf{t-domain}}$\hfill $\boldsymbol{\textbf{$\omega$-domain}}$ \\[6pt]
-    \text{Linearity} &$\alpha x(t)+\beta y(t)$ \hfill$\alpha X_k+\beta Y_k$\\[6pt]
+    \textbf{f(t)} & \textbf{F(s)}\hfill \textbf{Region of Convergence} \\[6pt]
+    
+    $u(-t)$&
+    $\dfrac{-1}{s}$\hfill $\Re[s]<0$  \\[10pt]
+        
+    $e^{at}u(-t)$ &$\dfrac{-1}{s-a}$ \hfill $\Re[s]<a$\\[10pt]
+
+    $e^{at}u(t)+e^{bt}u(-t)$ &$\dfrac{1}{s-a}-\dfrac{1}{s-b}$ \hfill $b<\Re[s]<a$\\[10pt]
+
+    $e^{-a|t|},a>0$ &$\dfrac{2a}{s^2-a^2}$\hfill $-a<\Re{s}<a$\\[10pt]
+    
+    $\operatorname{sgn}(t)$ &
+    $\displaystyle \frac{2}{s}$\hfill$  \Re[s] \neq 0$
+    
+    \end{tabularx}}
+    
+    \subsection{Trigonometric Value}
+    \begin{tabular}{c c c c c}
+    \textbf{Angle (°)} & \textbf{Angle (rad)} & $\sin\theta$ & $\cos\theta$ & $\tan\theta$ \\[6pt] 
+    $0^\circ$  & $0$        & $0$        & $1$        & $0$ \\[6pt]
+    $30^\circ$ & $\dfrac{\pi}{6}$    & $\dfrac{1}{2}$ & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{1}{\sqrt{3}}$ \\[6pt]
+    $45^\circ$ & $\dfrac{\pi}{4}$    & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $1$ \\[6pt]
+    $60^\circ$ & $\dfrac{\pi}{3}$    & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{1}{2}$ & $\sqrt{3}$ \\[6pt]
+    $90^\circ$ & $\dfrac{\pi}{2}$    & $1$        & $0$        & \text{undefined} \\
+    \end{tabular}
+    
+    
+    \textbf{\normalsize Basic Properties of Fourier Series}\\[6pt]
+    
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabularx}{\columnwidth}{l X X}
+    $\textbf{Property}$ & $\boldsymbol{\textbf{t-domain}}$\hfill $\boldsymbol{\textbf{$\omega$-domain}}$ \\[10pt]
+    \text{Linearity} &$\alpha x(t)+\beta y(t)$ \hfill$\alpha X_k+\beta Y_k$\\[10pt]
     \text{Power} &$\displaystyle\frac{1}{T}\int_{0}^T|x(t)|^2\dd t$ \hfill
-    $\displaystyle \sum_{n=-\infty}^{\infty}|X_k|^2$\\[6pt]
+    $\displaystyle \sum_{n=-\infty}^{\infty}|X_k|^2$\\[10pt]
     
     \text{Differentiation} &$x'(t)$ \hfill
-    $jk\omega_0X_k$ \\[6pt]
+    $jk\omega_0X_k$ \\[10pt]\
+    
+    
     \begin{tabular}{@{} l}
     Integration\\
     (only if $X_0=0$)
     \end{tabular}
-    &$\displaystyle\int_{-\infty}^t f(\tau)\,\dd\tau\, $ \hfill $\displaystyle \frac{X_k}{jk\omega_0},k\ne 0$ \\[8pt]
-    
+    &$\displaystyle\int_{-\infty}^t f(\tau)\,\dd\tau\, $ \hfill $\displaystyle \frac{X_k}{jk\omega_0},k\ne 0$ \\[10pt]
     
     \text{Time-shifting}&$x(t-\alpha)$ \hfill
-    $e^{-j\alpha w_0k}X_k$ \\[6pt]
+    $e^{-j\alpha w_0k}X_k$ \\[10pt]
     
     \text{Frequency-shift}&$e^{j\alpha w_0t}x(t)$ \hfill
-    $X_{k-\alpha}, \, \alpha \in \mathbb{Z}$ \\[6pt]
+    $X_{k-\alpha}, \, \alpha \in \mathbb{Z}$ \\[10pt]
     
-    \text{Convolution}&$z(t) = [x*y](t)$ \hfill $X_kY_k$ \\[6pt]
+    \text{Convolution}&$z(t) = [x*y](t)$ \hfill $X_kY_k$ \\[10pt]
     
     \text{Symmetry} &x(t) \text{real}\hfill 
     $\begin{aligned}
-        &|X_k| = |X_{-k}| \,\,\,\,\,\,\,\text{even} \\
-        &\angle X_k = - \angle X_{-k} \,\,\text{odd}
+    &|X_k| = |X_{-k}| \,\,\,\,\,\,\,\text{even} \\
+    &\angle X_k = - \angle X_{-k} \,\,\text{odd}
     \end{aligned}$
-    \end{tabularx}}\\[6pt]
+    \end{tabularx}}\\[20pt]
     
-    \textbf{\normalsize Basic Properties of CT Fourier Transforms}\\[6pt]
+    \textbf{\normalsize Basic Properties of CT Fourier Transforms}
     
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
-    $\textbf{Property}$ & $\boldsymbol{\textbf{t-domain}}$\hfill $\boldsymbol{\textbf{$\omega$-domain}}$ \\[6pt]
-    \text{Linearity} &$\alpha x(t)+\beta y(t)$ \hfill$\alpha X(\omega)+\beta Y(\omega)$\\[6pt]
+    $\textbf{Property}$ & $\boldsymbol{\textbf{t-domain}}$\hfill $\boldsymbol{\textbf{$\omega$-domain}}$ \\[10pt]
+    \text{Linearity} &$\alpha x(t)+\beta y(t)$ \hfill$\alpha X(\omega)+\beta Y(\omega)$\\[10pt]
     \text{Time Scaling} &$x(\alpha t), \alpha\neq 0$ \hfill
-    $\dfrac{1}{|\alpha|}X\left(\dfrac{\omega}{\alpha}\right)$ \\[6pt]
+    $\dfrac{1}{|\alpha|}X\left(\dfrac{\omega}{\alpha}\right)$ \\[10pt]
     \text{Energy} &$\displaystyle\int_{-\infty}^\infty|x(t)|^2\dd t$ \hfill
-    $\displaystyle \frac{1}{2\pi}\int_{-\infty}^\infty|X(\omega)|^2\dd \omega $\\[6pt]
+    $\displaystyle \frac{1}{2\pi}\int_{-\infty}^\infty|X(\omega)|^2\dd \omega $\\[10pt]
     \text{Reflection} &$x(-t)$ \hfill
-    $X(-\omega)$ \\[6pt]
+    $X(-\omega)$ \\[10pt]
     \text{Duality} &$X(t)$ \hfill
-    $2\pi x(-\omega)$ \\[6pt]
+    $2\pi x(-\omega)$ \\[10pt]
     \text{Differentiation} &$\displaystyle\dv[n]{t}x(n)$ \hfill
-    $(j\omega)^nX(\omega)$ \\[6pt]
+    $(j\omega)^nX(\omega)$ \\[10pt]
     \begin{tabular}{@{} l}
     Frequency\\
     Differentiation
     \end{tabular}
-    &$-jtx(t) $ \hfill $\displaystyle \dv{\omega}X(\omega)$ \\[8pt]
+    &$(-jt)^nx(t) $ \hfill $\displaystyle \dv[n]{\omega}X(\omega)$ \\[10pt]
     Integration
-    &$\displaystyle\int_{-\infty}^t x(\tau)\,\dd\tau\, $ \hfill $\displaystyle\frac{X(\omega)}{j\omega}+\pi X(0)\delta (\omega)$ \\[8pt]
+    &$\displaystyle\int_{-\infty}^t x(\tau)\,\dd\tau\, $ \hfill $\displaystyle\frac{X(\omega)}{j\omega}+\pi X(0)\delta (\omega)$ \\[10pt]
     \text{Time-shifting}&$x(t-\alpha)$ \hfill
-    $e^{-j\alpha w}X(\omega)$ \\[6pt]
+    $e^{-j\alpha w}X(\omega)$ \\[10pt]
     \text{Frequency-shift}&$e^{j w_0t}x(t)$ \hfill
-    $X(\omega-\omega_0)$ \\[6pt]
+    $X(\omega-\omega_0)$ \\[10pt]
     \text{Modulation}&$x(t)\cos(\omega_0t)$ \hfill
-    $\frac{1}{2}[X(\omega-\omega_0)+X(\omega+\omega_0)]$ \\[6pt]
-    \text{Periodic signals}&$\sum X_ke^{j\omega_0t}$ \hfill $\sum2\pi X_k\delta(\omega-k\omega_0)$ \\[6pt]
+    $\frac{1}{2}[X(\omega-\omega_0)+X(\omega+\omega_0)]$ \\[10pt]
+    \text{Periodic signals}&$\sum X_ke^{j\omega_0t}$ \hfill $\sum2\pi X_k\delta(\omega-k\omega_0)$ \\[10pt]
     \text{Symmetry} &x(t) \text{real}\hfill 
     $\begin{aligned}
-        &|X(\omega)| = |X(-\omega)| \,\,\,\,\,\,\text{even} \\
-        &\angle X(\omega) = - \angle X(-\omega) \,\,\text{odd}
+    &|X(\omega)| = |X(-\omega)| \,\,\,\,\,\,\text{even} \\
+    &\angle X(\omega) = - \angle X(-\omega) \,\,\text{odd}
     \end{aligned}$\\
-    \text{Windowing}&$x(t)y(t)$ \hfill $\dfrac{1}{2\pi}[X*Y](\omega)$ \\[6pt]
-    \text{Cosine Transform}&$x(t)$ even \hfill $\displaystyle \int_{-\infty}^\infty x(t)\cos(\omega t)\dd t$ \\[8pt]
-    \text{Sine Transform}&$x(t)$ odd \hfill $-j\displaystyle \int_{-\infty}^\infty x(t)\sin(\omega t)\dd t$ \\[6pt]
-    \end{tabularx}}\\[20pt]
+    \text{Windowing}&$x(t)y(t)$ \hfill $\dfrac{1}{2\pi}[X*Y](\omega)$ \\[10pt]
+    \text{Cosine Transform}&$x(t)$ even \hfill $\displaystyle \int_{-\infty}^\infty x(t)\cos(\omega t)\dd t$ \\[10pt]
+    \text{Sine Transform}&$x(t)$ odd \hfill $-j\displaystyle \int_{-\infty}^\infty x(t)\sin(\omega t)\dd t$ \\[4pt]
+    \end{tabularx}}
+    \textbf{Trigonometric Formulae}
+
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{l l}
     
-    \textbf{\normalsize CT Fourier Transform Pair}\\[6pt]
+
+
+    \textbf{Angle Sum/Difference} &
+    $\sin(a\pm b)=\sin a \cos b \pm \cos a \sin b$ \\[6pt]
+    &
+    $\cos(a\pm b)=\cos a \cos b \mp \sin a \sin b$ \\[6pt]
+    &
+    $\tan(a\pm b)=\dfrac{\tan a \pm \tan b}{1 \mp \tan a \tan b}$ \\[10pt]
+    
+    \textbf{Double Angle} &
+    $\sin(2\theta)=2\sin\theta\cos\theta$ \\[6pt]
+    &
+    $\cos(2\theta)=\cos^2\theta-\sin^2\theta$ \\[6pt]
+    &
+    $\cos(2\theta)=1-2\sin^2\theta=2\cos^2\theta-1$ \\[6pt]
+    &
+    $\tan(2\theta)=\dfrac{2\tan\theta}{1-\tan^2\theta}$ \\[10pt]
+    
+    
+    \textbf{Product-to-Sum} &
+    $\sin a \sin b = \dfrac{1}{2}[\cos(a-b)-\cos(a+b)]$ \\[6pt]
+    &
+    $\cos a \cos b = \dfrac{1}{2}[\cos(a-b)+\cos(a+b)]$ \\[6pt]
+    &
+    $\sin a \cos b = \dfrac{1}{2}[\sin(a+b)+\sin(a-b)]$ \\[10pt]
+    
+    
+    \end{tabular}}
+    \textbf{\normalsize CT Fourier Transform Pair}\\[10pt]
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
-    $\mathbf{x(t)}$ & $\mathbf{X(\omega)}$ \\[6pt]
+    $\mathbf{x(t)}$ & $\mathbf{X(\omega)}$ \\[10pt]
     
     $1$ &
-    $\displaystyle2\pi \delta(\omega)$\\[6pt]
+    $\displaystyle2\pi \delta(\omega)$\\[10pt]
     
-    $\delta(t)$ & $1,$\\[6pt]
+    $\delta(t)$ & $1$\\[10pt]
     
     $\delta(t-\tau)$&
-    $\displaystyle e^{-j\omega\tau}$  \\[6pt]
+    $\displaystyle e^{-j\omega\tau}$  \\[10pt]
     
     $u(t)$ &
-    $\displaystyle \frac{1}{j\omega}+\pi\delta(\omega)$ \\[6pt]
+    $\displaystyle \frac{1}{j\omega}+\pi\delta(\omega)$ \\[10pt]
     
     $u(-t)$ &
-    $\displaystyle\frac{-1}{j\omega}+\pi\delta(\omega)$\\[6pt]
+    $\displaystyle\frac{-1}{j\omega}+\pi\delta(\omega)$\\[10pt]
     
     $\text{sgn}(t)=2[u(t)-0.5]$ &
-    $\displaystyle \frac{2}{j\omega}$\\[6pt]
+    $\displaystyle \frac{2}{j\omega}$\\[10pt]
     
     $e^{-at}u(t)$ &
-    $\displaystyle\frac{1}{a+j\omega},$\hfill $a >0$ \\[6pt]
+    $\displaystyle\frac{1}{a+j\omega}$\hfill $a >0$ \\[10pt]
     
     $e^{at}u(-t)$ &
-    $\displaystyle\frac{1}{a-j\omega},$\hfill $a >0$ \\[6pt]
+    $\displaystyle\frac{1}{a-j\omega}$\hfill $a >0$ \\[10pt]
     
     $te^{at}u(t)$ &
-    $\displaystyle\frac{1}{(a+j\omega)^2},$\hfill $a >0$ \\[6pt]
+    $\displaystyle\frac{1}{(a+j\omega)^2}$\hfill $a >0$ \\[10pt]
     
     $e^{-a|t|}$ &
-    $\displaystyle \frac{2a}{a^2+\omega^2},$ \hfill $a>0$  \\[6pt]
+    $\displaystyle \frac{2a}{a^2+\omega^2}$ \hfill $a>0$  \\[10pt]
     
     $\cos(\omega_0t)$ &
-    $\displaystyle \pi[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)]$ \\[6pt]
+    $\displaystyle \pi[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)]$ \\[10pt]
     
-    $\sin(\omega_0t)$ & $\displaystyle -j\pi[\delta(\omega-\omega_0)-\delta(\omega+\omega_0)]$ \\[6pt]
+    $\sin(\omega_0t)$ & $\displaystyle -j\pi[\delta(\omega-\omega_0)-\delta(\omega+\omega_0)]$ \\[10pt]
     
     $u(t+\tau)-u(t-\tau)$
-     &$\displaystyle 2\tau\frac{\text{sin}(\omega\tau)}{\omega\tau},$\hfill $\tau > 0$ \\[8pt]
+     &$\displaystyle 2\tau\frac{\text{sin}(\omega\tau)}{\omega\tau},$\hfill $\tau > 0$ \\[10pt]
     
     $\dfrac{\sin(\omega_0t)}{\pi t}$
-     &$\displaystyle u(\omega+\omega_0)-u(\omega-\omega_0)$ \\[6pt]
+     &$\displaystyle u(\omega+\omega_0)-u(\omega-\omega_0)$ \\[10pt]
     
     
     $\displaystyle\sum_{n=-\infty}^\infty\delta(t-nT)$
-     &$\displaystyle\omega_0\sum_{n=-\infty}^\infty\delta(\omega-n\omega_0),$\hfill $\omega_0=\dfrac{2\pi}{T}$\\
-    \end{tabularx}}\\[4pt]
+     &$\displaystyle\omega_0\sum_{n=-\infty}^\infty\delta(\omega-n\omega_0)$\hfill $\omega_0=\dfrac{2\pi}{T}$\\
+    \end{tabularx}}
+
+
+    
+    \section{Sampling Theory}
+     \[x_s(t) = x(nT_s) = x(t)\rvert_{t = nT_s} = x(t)\sum_n \delta(t - nT_s)\]
+    \[X_s(\omega) = \frac{1}{T_s} \sum_{k=-\infty}^{\infty}X(\omega - k\omega_s)\]
+    
+    \textbf{Nyquist-Shannon Sampling Rate}
+     \[\omega_s = \frac{2\pi}{T_s} \geq 2\omega_\text{max}\]
+    \textbf{Aliasing} occurs if\,\, $\omega_s < 2\omega_\text{max}$\\[4pt]
+    \textbf{Aliasing frequency mapping} for $[0, f_s/2]$
+    \[f_{\text{alias}}=|f-kf_{s}|\]
+
+    \textbf{Reconstruction} $X(\omega)=X_s(\omega)H_\text{lp}(\omega)$:
+    \begin{equation*}
+    \hspace{-8em}
+    H_{\text{lp}}(\omega) =
+    \begin{cases}
+    T_s &  -\dfrac{\omega_s}{2} \leq \omega \leq \dfrac{\omega_s}{2}\\
+    0 & \text{otherwise}
+    \end{cases}
+    \end{equation*}
+    \textbf{Inclusive bounds.} If represented by a unit step function the bounds are inclusive for filters\\[6pt]
+    
+    \textbf{Signal Reconstruction from Sinc Interpolation}
+     \[x_r(t) = \sum_{n=-\infty}^{\infty} x(nT_s) \frac{\sin(\pi(t-nT_s)/T_s)}{\pi(t-nT_s)/T_s}\]
+
+    \section{Discrete Time Signals}
+    \textbf{Definition} $x[n] = x(nT_0)$.\\[6pt]
+    
+    \textbf{Periodicity}
+    \[x[n + kN] = x[n] \qquad \forall k\in \mathbb{Z}\]
+    
+    When sampling an analog sinusoid of fundamental period $T_0$, we obtain a periodic discrete sinusoid provided that $m$, $N$ not divisible by each-other,
+    \[\frac{T_s}{T_0} = \frac{m}{N}\]
+    
+    Aliasing occurs if\\
+    \[T_s > T_0/2\]
+    
+    Energy
+    \[E = \sum_{n = -\infty}^{\infty}\abs{x[n]}^2\]
+    
+    Power
+    \[P_x = \lim_{N \rightarrow \infty}\frac{1}{2N + 1}\sum_{n= -N}^{N}\abs{x[n]}^2\]
+    
+    Convolution\\\
+    \[y[n] = \sum_{k = -\infty}^{\infty} x[k]h[n-k]\]
+    
+    Bounded-Input Bounded-Output Stability
+    \[\sum_{n=-\infty}^\infty \abs{h[n]} < \infty\]
+    
+    \section{Discrete Time Systems}
+    
+    \textbf{Linearity}
+    \[\mathcal{S}[\alpha x[n] + \beta y[n]] = \alpha\mathcal{S}[x[n]] + \beta\mathcal{S}[y[n]]\]
+    
+    \textbf{Time Invariance}
+    \[\mathcal{S}[x[n]] = y[n]\Rightarrow\mathcal{S}[x [n\pm \tau] ]= y[n \pm \tau]\]
+    
+    \textbf{Convolution}
+    \[y[n] = (x*h)[n]=\sum_{k=-\infty}^\infty x[k]h[n-k]\]
+    
+    \textbf{BIBO Stability. }If an input bounded then the output of a BIBO stable system is bounded.\\
+    \[\Leftrightarrow \sum_{n=-\infty}^\infty 
+|h[n]| < \infty\]
+    \section{Z-Transform}
+     \[\mathcal{Z}[x(nT_s)] = \mathcal{L}[x_s(t)]\rvert_{z=e^{sT_s}} = \sum_n x(nT_s)z^{-n}\]
+    
+    Convergence
+     \[|X(z)| = \sum_n \abs{x[n]}r^{-n} < \infty\]
+    
+    Initial Value Theorem
+     \[x[0] = \lim_{z\rightarrow \infty}X(z)\]
+    
+    Final Value Theorem\\
+     \[\lim_{n\rightarrow \infty}x[n] = \lim_{z\rightarrow 1}(z-1)X(z)\]
+    
+    BIBO Stability. If the ROC contains radius $z=1$, then the system is BIBO stable.\\[6pt]
+    
+    \section{DT Fourier Series}
+
+    \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1} X_ke^{jk\Omega_0 n}\]
+
+    Fourier Series Coefficients (for any $t_0$)
+    \[ X_k = \frac{1}{N}\sum_{k=0}^{N-1}x[n]e^{-jk\Omega_0n}\quad     \text{where}\,\, \Omega_0=2\pi/N\]
     
     \textbf{\normalsize Basic Properties of Z-Transforms}\\[6pt]
 
@@ -510,48 +603,52 @@
     $(1-z^{-1})X(z)-x[-1]$ \\[6pt]
     \text{Accumulation} &$\displaystyle\sum_{k=0}^nx[k]$\hfill$\dfrac{X(z)}{1-z^{-1}}$ \\[6pt]
     \end{tabularx}}
+    \pagebreak
     
-    \textbf{\normalsize One-sided Z-Transforms}\\[6pt]
+    \textbf{\normalsize One-sided Z-Transforms}
     
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
-    \textbf{f[n]} & \textbf{X(z)}\hfill \textbf{Region of Convergence} \\[6pt]
+    \textbf{x[n]} & \textbf{X(z)}\hfill \textbf{Region of Convergence} \\[10pt]
     
     
     $\delta[n]$ &
-    $1,$\hfill whole $z$-plane \\[6pt]
+    $1$\hfill whole $z$-plane \\[10pt]
     
+    $\delta[n-n_0]$ &
+    $z^{-n_0}$\hfill $z\ne0,n_0\ge1$ \\[10pt]
+
     $u[n]$&
-    $\displaystyle \frac{1}{1-z^{-1}},$\hfill $\abs{z}>1$  \\[10pt]
+    $\displaystyle \frac{1}{1-z^{-1}}$\hfill $\abs{z}>1$  \\[10pt]
     
     $nu[n]$ &
     $\displaystyle\frac{z^{-1}}{(1-z^{-1})^2}$\hfill $\abs{z}>1$   \\[10pt]
     
     $n^2u[n]$ &
-    $\dfrac{z^{-1}(1+z^{-1})}{(1-z^{-1})^3},$\hfill $\abs{z}>1$  \\[10pt]
+    $\dfrac{z^{-1}(1+z^{-1})}{(1-z^{-1})^3}$\hfill $\abs{z}>1$  \\[10pt]
     
-    $\alpha^nu[n], \abs{\alpha}<1$ &$\dfrac{1}{1-\alpha z^{-1}},$\hfill $\abs{z}>\abs{\alpha}$ \\[6pt]
+    $\alpha^nu[n], \abs{\alpha}<1$ &$\dfrac{1}{1-\alpha z^{-1}}$\hfill $\abs{z}>\abs{\alpha}$ \\[10pt]
     
-    $n\alpha^nu[n], \abs{\alpha}<1$ &$\dfrac{\alpha z^{-1}}{(1-\alpha z^{-1})^2},$\hfill $\abs{z}>\abs{\alpha}$ \\[10pt]
+    $n\alpha^nu[n], \abs{\alpha}<1$ &$\dfrac{\alpha z^{-1}}{(1-\alpha z^{-1})^2}$\hfill $\abs{z}>\abs{\alpha}$ \\[10pt]
     
     $\cos(\omega_0 n)u[t]$ &
-    $\displaystyle\frac{1-\cos(\omega_0)z^{-1}}{1-2\cos (\omega_0)z^{-1}+z^{-2}},$\hfill $\abs{z} >1$ \\[10pt]
+    $\displaystyle\frac{1-\cos(\omega_0)z^{-1}}{1-2\cos (\omega_0)z^{-1}+z^{-2}}$\hfill $\abs{z} >1$ \\[10pt]
     
     $\sin(\omega_0 n)u[t]$ &
-    $\displaystyle\frac{\sin(\omega_0)z^{-1}}{1-2\cos (\omega_0)z^{-1}+z^{-2}},$\hfill $\abs{z} >1$ \\[10pt]
+    $\displaystyle\frac{\sin(\omega_0)z^{-1}}{1-2\cos (\omega_0)z^{-1}+z^{-2}}$\hfill $\abs{z} >1$ \\[10pt]
     
     \begin{tabular}{@{} l}
     $\alpha^n\cos(\omega_0 n)u[t]$ \\[1pt]
     \qquad $\abs{\alpha}<1$
     \end{tabular}&
-    $\displaystyle\frac{1-\alpha\cos(\omega_0)z^{-1}}{1-2\alpha\cos (\omega_0)z^{-1}+\alpha^2z^{-2}},$\hfill $\abs{z} >\abs{\alpha}$ \\[10pt]
+    $\displaystyle\frac{1-\alpha\cos(\omega_0)z^{-1}}{1-2\alpha\cos (\omega_0)z^{-1}+\alpha^2z^{-2}}$\hfill $\abs{z} >\abs{\alpha}$ \\[10pt]
     
     
     \begin{tabular}{@{} l}
     $\alpha^n\sin(\omega_0 n)u[t]$ \\[1pt]
     \qquad $\abs{\alpha}<1$
     \end{tabular}&
-    $\displaystyle\frac{\alpha\sin(\omega_0)z^{-1}}{1-2\alpha\cos (\omega_0)z^{-1}+\alpha^2z^{-2}},$\hfill $\abs{z} >\abs{\alpha}$ \\[10pt]
+    $\displaystyle\frac{\alpha\sin(\omega_0)z^{-1}}{1-2\alpha\cos (\omega_0)z^{-1}+\alpha^2z^{-2}}$\hfill $\abs{z} >\abs{\alpha}$ \\[10pt]
     
     \end{tabularx}}
     
@@ -559,21 +656,18 @@
     
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
-    \textbf{f[n]} & \textbf{X(z)}\hfill \textbf{Region of Convergence} \\[6pt]
+    \textbf{x[n]} & \textbf{X(z)}\hfill \textbf{Region of Convergence} \\[10pt]
     
     $-u[-n-1]$&
-    $\displaystyle \frac{1}{1-z^{-1}},$\hfill $\abs{z}<1$  \\[10pt]
+    $\displaystyle \frac{1}{1-z^{-1}}$\hfill $\abs{z}<1$  \\[10pt]
     
-    $-\alpha^nu[-n-1]$ &$\dfrac{1}{1-\alpha z^{-1}},$\hfill $\abs{z}<\abs{\alpha}$ \\[6pt]
+    $-\alpha^nu[-n-1]$ &$\dfrac{1}{1-\alpha z^{-1}}$\hfill $\abs{z}<\abs{\alpha}$ \\[10pt]
     
-    $-n\alpha^nu[-n-1]$ &$\dfrac{1}{1-\alpha z^{-1}}-\dfrac{1}{1-\alpha^{-1}z^{-1}}$\hfill $\abs{\alpha}<\abs{z}<\dfrac{1}{\abs{\alpha}}$ \\[10pt]
-    
-    
+    $-n\alpha^nu[-n-1]$ &$\dfrac{1}{1-\alpha z^{-1}}-\dfrac{1}{1-\alpha^{-1}z^{-1}}$\hfill $\abs{\alpha}<\abs{z}<\dfrac{1}{\abs{\alpha}}$
     \end{tabularx}}
     
-
-    
-    \textbf{\normalsize Basic Properties of DT Fourier Transforms}\\[6pt]
+    \textbf{\normalsize Basic Properties of DT Fourier Transforms}
+        
     \resizebox{\columnwidth}{!}{%
     \begin{tabularx}{\columnwidth}{l X X}
     $\textbf{Property}$ & $\boldsymbol{\textbf{t-domain}}$\hfill $\boldsymbol{\textbf{$\Omega$-domain}}$ \\[6pt]
@@ -630,15 +724,26 @@
     \end{tabularx}%
     }
 
-    \subsection{Linear Algebra}
-
-    State-space Representation
-    \[\dot{\mathbf{x}}=A\,\mathbf{x}+B\, \mathbf{u}, \mathbf{y}=C\,\mathbf{x}+D\,\mathbf{u}\]
+    \section{State Space Representation}
+    \textbf{Continuous Time}
+    \[\begin{aligned}
+        &\dot{\mathbf{x}}=A\mathbf{x}+ B\mathbf{u}\\
+        &\mathbf{y}=C\mathbf{x}+D\mathbf{u}
+    \end{aligned}\]
     
-    Transfer function matrix
-    \[\mathbf{H}(s)=(sI-A)^{-1}B+D\]
+    \textbf{Transfer function matrix for $s$-domain}
+    \[\mathbf{H}(s)=C(sI-A)^{-1}B+D\]
+    
+    \textbf{Discrete Time}
 
-    Diagonalization  
+    \[\begin{aligned}
+    &{\mathbf{x}}[n+1]=A\mathbf{x}[n]+ B\mathbf{u}[n]\\
+    &\mathbf{y}[n]=C\mathbf{x}[n]+D\mathbf{u}[n]\end{aligned}\]
+    
+   \textbf{Transfer function matrix for $z$-domain}
+    \[\mathbf{H}(z)=C(zI-A)^{-1}B+D\]
+
+    \textbf{Diagonalization}  
     \[A = P D P^{-1} ,\qquad D=\begin{bmatrix}
     \lambda_1 & 0\\
     0 & \lambda_2
@@ -650,7 +755,118 @@
     \vert & \vert
     \end{bmatrix}\]
 
-    Matrix exponential 
+    \textbf{Similarity Transformation}
+    \[\tilde{\mathbf{x}}(t)=T\mathbf{x}(t)\]
+    \[ \begin{bmatrix}
+        A,B,C,D
+    \end{bmatrix}\Rightarrow [\tilde{A}=TAT^{-1}, \tilde{B}=TB, \tilde{C}= CT^{-1}, \tilde{D}=D]\]\\[6pt]
+
+    \textbf{Controllable Canonical Form}
+    \[(A,B) \,\text{ is controllable} \Leftrightarrow \text{rank}[B,AB,...,A^{N-1}B] = N\]
+
+    \textbf{Observable Canonical Form}
+    \[(A,C) \,\text{ is observable} \Leftrightarrow \text{rank}\left[\begin{aligned}
+        &\,\,\,\, C\\
+        &\,\,CA\\
+        &\,\,\,...\\
+        &\,\,CA^{N-1}
+    \end{aligned} \right]= N\]
+
+    \textbf{State-Space Block Diagram}\\[6pt]
+    
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1, scale =0.8]
+    %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+    
+    %Straight Lines [id:da7911127368151681] 
+    \draw    (71.33,148) -- (139.67,148) ;
+    \draw [shift={(142.67,148)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Triangle [id:dp06552913749226819] 
+    \draw   (178.76,148.64) -- (142.35,169.66) -- (142.55,127.02) -- cycle ;
+    %Straight Lines [id:da4193513196284264] 
+    \draw    (121.33,91) -- (120.83,148) ;
+    %Straight Lines [id:da8364940932908651] 
+    \draw    (121.33,91) -- (202.33,91) ;
+    \draw [shift={(205.33,91)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Triangle [id:dp9020288613846753] 
+    \draw   (241.76,90.64) -- (205.35,111.66) -- (205.55,69.02) -- cycle ;
+    %Straight Lines [id:da825640703842873] 
+    \draw    (241.76,90.64) -- (414.87,90.64) ;
+    %Straight Lines [id:da7889533945776682] 
+    \draw    (414.87,90.64) -- (414.87,121.14) -- (414.84,131.14) ;
+    \draw [shift={(414.83,134.14)}, rotate = 270.14] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Circle [id:dp2060920321048455] 
+    \draw   (400.33,148.64) .. controls (400.33,140.63) and (406.83,134.14) .. (414.83,134.14) .. controls (422.84,134.14) and (429.33,140.63) .. (429.33,148.64) .. controls (429.33,156.64) and (422.84,163.14) .. (414.83,163.14) .. controls (406.83,163.14) and (400.33,156.64) .. (400.33,148.64) -- cycle ;
+    %Straight Lines [id:da7374313240106769] 
+    \draw    (178.76,148.64) -- (205.67,148.64) ;
+    \draw [shift={(208.67,148.64)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Circle [id:dp11597130897101882] 
+    \draw   (208.67,148.64) .. controls (208.67,140.63) and (215.16,134.14) .. (223.17,134.14) .. controls (231.17,134.14) and (237.67,140.63) .. (237.67,148.64) .. controls (237.67,156.64) and (231.17,163.14) .. (223.17,163.14) .. controls (215.16,163.14) and (208.67,156.64) .. (208.67,148.64) -- cycle ;
+    %Straight Lines [id:da6392624218450504] 
+    \draw    (237.67,148.64) -- (264.57,148.64) ;
+    \draw [shift={(267.57,148.64)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Rectangle [id:dp8994838817320857] 
+    \draw   (267.17,126.83) -- (293.67,126.83) -- (293.67,170.55) -- (267.17,170.55) -- cycle ;
+    %Straight Lines [id:da42203313358191974] 
+    \draw    (293.67,148.64) -- (320.57,148.64) ;
+    \draw [shift={(323.57,148.64)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Triangle [id:dp7452103275519165] 
+    \draw   (359.76,148.64) -- (323.35,169.66) -- (323.55,127.02) -- cycle ;
+    %Straight Lines [id:da8822655295484478] 
+    \draw    (359.76,148.64) -- (397.33,148.64) ;
+    \draw [shift={(400.33,148.64)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Shape: Triangle [id:dp3556771046380641] 
+    \draw   (257.45,210.26) -- (293.81,189.14) -- (293.72,231.78) -- cycle ;
+    %Straight Lines [id:da3065205266821288] 
+    \draw    (308.62,148.64) -- (308.33,211) ;
+    %Straight Lines [id:da5143898161182251] 
+    \draw    (308.33,211) -- (297.33,211) ;
+    \draw [shift={(294.33,211)}, rotate = 360] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Straight Lines [id:da7195537911744448] 
+    \draw    (223.17,166.14) -- (223.17,211) ;
+    \draw [shift={(223.17,163.14)}, rotate = 90] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    %Straight Lines [id:da43863759363350396] 
+    \draw    (223.17,211) -- (259.28,211) ;
+    %Straight Lines [id:da16727010939777254] 
+    \draw    (429.33,148.64) -- (456.24,148.64) ;
+    \draw [shift={(459.24,148.64)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (10.72,-5.15) -- (0,0) -- (10.72,5.15) -- (7.12,0) -- cycle    ;
+    
+    % Text Node
+    \draw (210,83.4) node [anchor=north west][inner sep=0.75pt]    {$D$};
+    % Text Node
+    \draw (405,140.4) node [anchor=north west][inner sep=0.75pt]    {$\sum $};
+    % Text Node
+    \draw (214,140.4) node [anchor=north west][inner sep=0.75pt]    {$\sum $};
+    % Text Node
+    \draw (273,133) node [anchor=north west][inner sep=0.75pt]    {$\dfrac{1}{s}$};
+    % Text Node
+    \draw (295.67,125) node [anchor=north west][inner sep=0.75pt]    {$\mathbf{x}( t)$};
+    % Text Node
+    \draw (237.67,125) node [anchor=north west][inner sep=0.75pt]    {$\dot{\mathbf{x}}(t)$};
+    % Text Node
+    \draw (77.67,127.23) node [anchor=north west][inner sep=0.75pt]    {$\mathbf{u}( t)$};
+    % Text Node
+    \draw (145,142) node [anchor=north west][inner sep=0.75pt]    {$B$};
+    % Text Node
+    \draw (327,142) node [anchor=north west][inner sep=0.75pt]    {$C$};
+    % Text Node
+    \draw (275,201.4) node [anchor=north west][inner sep=0.75pt]    {$A$};
+    % Text Node
+    \draw (195,155) node [anchor=north west][inner sep=0.75pt]    {$+$};
+    % Text Node
+    \draw (204,170.04) node [anchor=north west][inner sep=0.75pt]    {$+$};
+    % Text Node
+    \draw (383.05,129.04) node [anchor=north west][inner sep=0.75pt]    {$+$};
+    % Text Node
+    \draw (395.05,115.04) node [anchor=north west][inner sep=0.75pt]    {$+$};
+    % Text Node
+    \draw (434.67,123.23) node [anchor=north west][inner sep=0.75pt]    {$\mathbf{y}( t)$};
+    
+    
+    \end{tikzpicture}
+
+
+    \textbf{Matrix exponential}
     \[e^{At} = P e^{Dt} P^{-1},\,
     e^{Dt}=
     \begin{bmatrix}
@@ -658,12 +874,38 @@
     0 & e^{\lambda_2 t}
     \end{bmatrix}\]
 
-    \subsection{Other Identities}
+    \textbf{Cayley-Hamilton Theorem}
+    \[p(\lambda)=\det (\lambda I-A)\Rightarrow p(A)=0\]
+
+    % Result:
+    % \[A^n=\alpha I+\beta A\Rightarrow \begin{bmatrix}
+    %     \lambda_1^n\\
+    %     \lambda_2^n
+    % \end{bmatrix} = \begin{bmatrix}
+    %     1&\lambda_1\\
+    %     1&\lambda_2
+    % \end{bmatrix}\begin{bmatrix}
+    %     \alpha\\
+    %     \beta
+    % \end{bmatrix}\]
+    % \[\Rightarrow\begin{bmatrix}
+    %     \alpha\\
+    %     \beta
+    % \end{bmatrix}=\frac{1}{\lambda_2-\lambda_1}\begin{bmatrix}
+    %     \lambda_2 &-\lambda_1\\
+    %     -1&1
+    % \end{bmatrix}\begin{bmatrix}
+    %     \lambda_1^n\\
+    %     \lambda_2^n
+    % \end{bmatrix}\]
+    \subsection{Miscellaneous Identities}
     Geometric Series
     \[\sum_{k=0}^nx^k=\frac{1-x^{n+1}}{1-x}, \qquad\sum_{k=0}^\infty x^k=\frac{1}{1-x} \qquad(0<x<1)\]
     Euler's Formula
     \[e^{j\theta }=\cos \theta+j\sin \theta,\quad \cos\theta=\frac{e^{j\theta}+e^{-j\theta}}{2},\quad\sin \theta= \frac{e^{j\theta}-e^{-j\theta}}{2j}\]
-        
+
+    \subsection{Problem}
+
     \end{multicols}
     
     
